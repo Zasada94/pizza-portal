@@ -1,9 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Container = styled.div`
 	height: 60px;
-	/* padding: 10px 20px; */
+	padding: 10px 20px;
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
@@ -14,17 +15,33 @@ const Left = styled.div`
 `;
 
 const Logo = styled.div``;
+
 const LogoIcon = styled.div``;
 
 const Center = styled.div``;
 
 const Right = styled.div``;
 
-const MenuItem = styled.button``;
+const MenuItem = styled.button`
+	border: none;
+	padding: 10px;
+	background-color: white;
+	cursor: pointer;
+	font-weight: 500;
+`;
 
-const Button = styled.button``;
+const Button = styled.button`
+	border: none;
+	border-radius: 10px;
+	padding: 10px;
+	background-color: red;
+	cursor: pointer;
+	font-weight: 500;
+`;
 
 const Navbar = () => {
+	const navigate = useNavigate();
+
 	return (
 		<Container>
 			<Left>
@@ -34,13 +51,13 @@ const Navbar = () => {
 				</Logo>
 			</Left>
 			<Center>
-				<MenuItem>MENU</MenuItem>
-				<MenuItem>PROMOCJE</MenuItem>
-				<MenuItem>GALERIA</MenuItem>
-				<MenuItem>KONTAKT</MenuItem>
+				<MenuItem onClick={() => navigate("/menu")}>MENU</MenuItem>
+				<MenuItem onClick={() => navigate("/promotions")}>PROMOTIONS</MenuItem>
+				<MenuItem onClick={() => navigate("/gallery")}>GALLERY</MenuItem>
+				<MenuItem onClick={() => navigate("/contact")}>CONTACT</MenuItem>
 			</Center>
 			<Right>
-				<Button>ZAMÓW ONLINE</Button>
+				<Button>ORDER ONLINE</Button>
 			</Right>
 		</Container>
 	);
