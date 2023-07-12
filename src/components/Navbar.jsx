@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { tablet } from "../responsive";
+import { full, tablet } from "../responsive";
 
 const Container = styled.div`
 	height: 60px;
@@ -21,10 +21,24 @@ const LogoIcon = styled.div``;
 
 const Center = styled.div`
 	display: flex;
+	flex-direction: column;
+	${tablet({
+		display: "flex",
+		alignItems: "center",
+		justifyContent: "flex-end",
+	})}
+	height: 300px;
+`;
+const MenuWrapper = styled.div`
+	/* ${tablet({ transform: "translate(0, -200%)" })}; */
+	${full({ display: "flex", alignItems: "center", justifyContent: "center" })}
+	display: ${(props) => (props.opened === "true" ? "flex" : "none")};
+	justify-content: flex-end;
+	flex-direction: ${(props) => props.opened === "true" && "column"};
 `;
 
 const Burger = styled.button`
-	display: none;
+	${full({ display: "none" })}
 	width: 33px;
 	height: 33px;
 	background: none;
@@ -42,7 +56,8 @@ const BurgerLine = styled.div`
 	display: ${(props) =>
 		props.type === "middle" && props.opened === "true" && "none"};
 	transform: ${(props) =>
-		props.type === "top" && props.opened === "true" && "rotate(45deg)" || props.type === "bottom" && props.opened === "true" && "rotate(-45deg)"};
+		(props.type === "top" && props.opened === "true" && "rotate(45deg)") ||
+		(props.type === "bottom" && props.opened === "true" && "rotate(-45deg)")};
 `;
 
 const Right = styled.div``;
@@ -53,7 +68,6 @@ const MenuItem = styled.button`
 	background-color: white;
 	cursor: pointer;
 	font-weight: 500;
-	${tablet({ display: "none" })}
 `;
 
 const Button = styled.button`
@@ -89,10 +103,14 @@ const Navbar = () => {
 					<BurgerLine opened={open.toString()} type="middle"></BurgerLine>
 					<BurgerLine opened={open.toString()} type="bottom"></BurgerLine>
 				</Burger>
-				<MenuItem onClick={() => navigate("/menu")}>MENU</MenuItem>
-				<MenuItem onClick={() => navigate("/promotions")}>PROMOTIONS</MenuItem>
-				<MenuItem onClick={() => navigate("/gallery")}>GALLERY</MenuItem>
-				<MenuItem onClick={() => navigate("/contact")}>CONTACT</MenuItem>
+				<MenuWrapper opened={open.toString()}>
+					<MenuItem onClick={() => navigate("/menu")}>MENU</MenuItem>
+					<MenuItem onClick={() => navigate("/promotions")}>
+						PROMOTIONS
+					</MenuItem>
+					<MenuItem onClick={() => navigate("/gallery")}>GALLERY</MenuItem>
+					<MenuItem onClick={() => navigate("/contact")}>CONTACT</MenuItem>
+				</MenuWrapper>
 			</Center>
 			<Right>
 				<Button>ORDER ONLINE</Button>
