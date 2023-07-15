@@ -23,6 +23,7 @@ const Container = styled.div`
 
 const LogoIcon = styled.img`
 	height: 60px;
+	margin-left: 5px;
 `;
 
 const Center = styled.div`
@@ -57,12 +58,11 @@ const Burger = styled.button`
 	justify-content: center;
 	cursor: pointer;
 	${tablet({ display: "flex", flexDirection: "column" })}
-	transition: 0.5s ease-out;
 `;
 const BurgerLine = styled.div`
 	transition: 0.5s ease-out;
 	width: 30px;
-	height: 2px;
+	height: 1px;
 	background-color: black;
 	margin: ${(props) => props.type === "middle" && "12px 0"};
 	display: ${(props) =>
@@ -79,21 +79,33 @@ const BurgerLine = styled.div`
 const Right = styled.div``;
 
 const MenuItem = styled.button`
+	color: black;
 	border: none;
-	margin: 10px;
+	border-radius: 5px;
+	padding: 10px 25px;
+	margin: 5px;
 	background-color: white;
 	cursor: pointer;
 	font-weight: 500;
+	transition: 0.5s ease-out;
+	&:hover {
+		color: #fe5757;
+	}
 `;
 
 const Button = styled.button`
-	border: none;
+	border: 1px solid rgba(0, 0, 0, 0);
 	border-radius: 10px;
 	padding: 8px;
 	margin-right: 10px;
 	background-color: #fe5757;
 	cursor: pointer;
 	font-weight: 500;
+	transition: 0.5s ease-out;
+	&:hover {
+		background-color: white;
+		border: 2px solid #fe5757;
+	}
 `;
 
 const Navbar = () => {
