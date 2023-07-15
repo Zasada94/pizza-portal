@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { full, tablet } from "../responsive";
+import logo from "../images/logo.png";
 
 const Wrapper = styled.div`
 	height: auto;
@@ -10,7 +11,6 @@ const Wrapper = styled.div`
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-around;
-	background-color: red;
 `;
 
 const Container = styled.div`
@@ -19,16 +19,11 @@ const Container = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
-	background-color: blue;
 `;
 
-const Left = styled.div`
-	font-weight: 800;
+const LogoIcon = styled.img`
+	height: 60px;
 `;
-
-const Logo = styled.div``;
-
-const LogoIcon = styled.div``;
 
 const Center = styled.div`
 	display: flex;
@@ -98,48 +93,40 @@ const Navbar = () => {
 	const [open, setOpen] = useState(false);
 
 	return (
-		
-<Wrapper>
-		<Container>
-			<Left>
-				<Logo>
-					<LogoIcon></LogoIcon>
-					PIZZA PORTAL
-				</Logo>
-			</Left>
-			<Center opened={open.toString()}>
-				<Burger
-					onClick={() => {
-						setOpen(!open);
-					}}
-				>
-					<BurgerLine opened={open.toString()} type="top"></BurgerLine>
-					<BurgerLine opened={open.toString()} type="middle"></BurgerLine>
-					<BurgerLine opened={open.toString()} type="bottom"></BurgerLine>
-				</Burger>
+		<Wrapper>
+			<Container>
+						<LogoIcon src={logo}></LogoIcon>
+				<Center opened={open.toString()}>
+					<Burger
+						onClick={() => {
+							setOpen(!open);
+						}}
+					>
+						<BurgerLine opened={open.toString()} type="top"></BurgerLine>
+						<BurgerLine opened={open.toString()} type="middle"></BurgerLine>
+						<BurgerLine opened={open.toString()} type="bottom"></BurgerLine>
+					</Burger>
 
-				<MenuDesktop opened={open.toString()}>
-					<MenuItem onClick={() => navigate("/menu")}>MENU</MenuItem>
-					<MenuItem onClick={() => navigate("/promotions")}>
-						PROMOTIONS
-					</MenuItem>
-					<MenuItem onClick={() => navigate("/gallery")}>GALLERY</MenuItem>
-					<MenuItem onClick={() => navigate("/contact")}>CONTACT</MenuItem>
-				</MenuDesktop>
-			</Center>
-			<Right>
-				<Button>ORDER ONLINE</Button>
-			</Right>
-		</Container>
-						<MenuMobile opened={open.toString()}>
+					<MenuDesktop opened={open.toString()}>
 						<MenuItem onClick={() => navigate("/menu")}>MENU</MenuItem>
 						<MenuItem onClick={() => navigate("/promotions")}>
 							PROMOTIONS
 						</MenuItem>
 						<MenuItem onClick={() => navigate("/gallery")}>GALLERY</MenuItem>
 						<MenuItem onClick={() => navigate("/contact")}>CONTACT</MenuItem>
-					</MenuMobile>
-					</Wrapper>
+					</MenuDesktop>
+				</Center>
+				<Right>
+					<Button>ORDER ONLINE</Button>
+				</Right>
+			</Container>
+			<MenuMobile opened={open.toString()}>
+				<MenuItem onClick={() => navigate("/menu")}>MENU</MenuItem>
+				<MenuItem onClick={() => navigate("/promotions")}>PROMOTIONS</MenuItem>
+				<MenuItem onClick={() => navigate("/gallery")}>GALLERY</MenuItem>
+				<MenuItem onClick={() => navigate("/contact")}>CONTACT</MenuItem>
+			</MenuMobile>
+		</Wrapper>
 	);
 };
 
