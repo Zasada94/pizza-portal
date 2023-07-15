@@ -89,22 +89,24 @@ const MenuItem = styled.button`
 	font-weight: 500;
 	transition: 0.5s ease-out;
 	&:hover {
-		color: #fe5757;
+		color: #be3144;
 	}
 `;
 
 const Button = styled.button`
+	color: white;
 	border: 1px solid rgba(0, 0, 0, 0);
 	border-radius: 10px;
 	padding: 8px;
 	margin-right: 10px;
-	background-color: #fe5757;
+	background-color: #be3144;
 	cursor: pointer;
 	font-weight: 500;
 	transition: 0.5s ease-out;
 	&:hover {
 		background-color: white;
-		border: 2px solid #fe5757;
+		border: 2px solid #be3144;
+		color: black;
 	}
 `;
 
