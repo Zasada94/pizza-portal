@@ -3,12 +3,23 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { full, tablet } from "../responsive";
 
+const Wrapper = styled.div`
+	height: auto;
+	padding: 10px 20px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+	background-color: red;
+`;
+
 const Container = styled.div`
 	height: 60px;
-	padding: 10px 20px;
+	width: 100vw;
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
+	background-color: blue;
 `;
 
 const Left = styled.div`
@@ -22,19 +33,21 @@ const LogoIcon = styled.div``;
 const Center = styled.div`
 	display: flex;
 	flex-direction: column;
+	align-items: center;
+	min-width: 110px;
 	${tablet({
-		display: "flex",
-		alignItems: "center",
 		justifyContent: "flex-end",
 	})}
-	height: 300px;
 `;
-const MenuWrapper = styled.div`
-	/* ${tablet({ transform: "translate(0, -200%)" })}; */
-	${full({ display: "flex", alignItems: "center", justifyContent: "center" })}
+const MenuMobile = styled.div`
+	${full({ display: "none" })}
 	display: ${(props) => (props.opened === "true" ? "flex" : "none")};
-	justify-content: flex-end;
-	flex-direction: ${(props) => props.opened === "true" && "column"};
+	flex-direction: column;
+`;
+
+const MenuDesktop = styled.div`
+	${tablet({ display: "none" })}
+	display: ${(props) => (props.opened === "true" ? "none" : "flex")};
 `;
 
 const Burger = styled.button`
@@ -85,6 +98,8 @@ const Navbar = () => {
 	const [open, setOpen] = useState(false);
 
 	return (
+		
+<Wrapper>
 		<Container>
 			<Left>
 				<Logo>
@@ -92,30 +107,39 @@ const Navbar = () => {
 					PIZZA PORTAL
 				</Logo>
 			</Left>
-			<Center>
+			<Center opened={open.toString()}>
 				<Burger
 					onClick={() => {
 						setOpen(!open);
-						console.log(open);
 					}}
 				>
 					<BurgerLine opened={open.toString()} type="top"></BurgerLine>
 					<BurgerLine opened={open.toString()} type="middle"></BurgerLine>
 					<BurgerLine opened={open.toString()} type="bottom"></BurgerLine>
 				</Burger>
-				<MenuWrapper opened={open.toString()}>
+
+				<MenuDesktop opened={open.toString()}>
 					<MenuItem onClick={() => navigate("/menu")}>MENU</MenuItem>
 					<MenuItem onClick={() => navigate("/promotions")}>
 						PROMOTIONS
 					</MenuItem>
 					<MenuItem onClick={() => navigate("/gallery")}>GALLERY</MenuItem>
 					<MenuItem onClick={() => navigate("/contact")}>CONTACT</MenuItem>
-				</MenuWrapper>
+				</MenuDesktop>
 			</Center>
 			<Right>
 				<Button>ORDER ONLINE</Button>
 			</Right>
 		</Container>
+						<MenuMobile opened={open.toString()}>
+						<MenuItem onClick={() => navigate("/menu")}>MENU</MenuItem>
+						<MenuItem onClick={() => navigate("/promotions")}>
+							PROMOTIONS
+						</MenuItem>
+						<MenuItem onClick={() => navigate("/gallery")}>GALLERY</MenuItem>
+						<MenuItem onClick={() => navigate("/contact")}>CONTACT</MenuItem>
+					</MenuMobile>
+					</Wrapper>
 	);
 };
 
