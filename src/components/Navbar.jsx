@@ -10,7 +10,6 @@ const Wrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: space-around;
 `;
 
 const Container = styled.div`
@@ -18,7 +17,8 @@ const Container = styled.div`
 	width: 100vw;
 	display: flex;
 	align-items: center;
-	justify-content: space-around;
+	justify-content: space-between;
+	position: reltive;
 `;
 
 const LogoIcon = styled.img`
@@ -29,7 +29,9 @@ const Center = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	min-width: 110px;
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, 0);
 	${tablet({
 		justifyContent: "flex-end",
 	})}
@@ -47,25 +49,31 @@ const MenuDesktop = styled.div`
 
 const Burger = styled.button`
 	${full({ display: "none" })}
-	width: 33px;
-	height: 33px;
+	width: 30px;
+	height: 30px;
 	background: none;
 	border: none;
 	align-items: center;
 	justify-content: center;
 	cursor: pointer;
 	${tablet({ display: "flex", flexDirection: "column" })}
+	transition: 0.5s ease-out;
 `;
 const BurgerLine = styled.div`
+	transition: 0.5s ease-out;
 	width: 30px;
-	height: 1px;
+	height: 2px;
 	background-color: black;
 	margin: ${(props) => props.type === "middle" && "12px 0"};
 	display: ${(props) =>
 		props.type === "middle" && props.opened === "true" && "none"};
 	transform: ${(props) =>
-		(props.type === "top" && props.opened === "true" && "rotate(45deg)") ||
-		(props.type === "bottom" && props.opened === "true" && "rotate(-45deg)")};
+		(props.type === "bottom" &&
+			props.opened === "true" &&
+			"rotate(45deg) translate(-5%, 0)") ||
+		(props.type === "top" &&
+			props.opened === "true" &&
+			"rotate(-45deg) translate(-5%, 0)")};
 `;
 
 const Right = styled.div``;
@@ -81,8 +89,9 @@ const MenuItem = styled.button`
 const Button = styled.button`
 	border: none;
 	border-radius: 10px;
-	padding: 10px;
-	background-color: red;
+	padding: 8px;
+	margin-right: 10px;
+	background-color: #fe5757;
 	cursor: pointer;
 	font-weight: 500;
 `;
@@ -95,7 +104,7 @@ const Navbar = () => {
 	return (
 		<Wrapper>
 			<Container>
-						<LogoIcon src={logo}></LogoIcon>
+				<LogoIcon src={logo}></LogoIcon>
 				<Center opened={open.toString()}>
 					<Burger
 						onClick={() => {
@@ -112,8 +121,9 @@ const Navbar = () => {
 						<MenuItem onClick={() => navigate("/promotions")}>
 							PROMOTIONS
 						</MenuItem>
-						<MenuItem onClick={() => navigate("/gallery")}>GALLERY</MenuItem>
+
 						<MenuItem onClick={() => navigate("/contact")}>CONTACT</MenuItem>
+						<MenuItem onClick={() => navigate("/account")}>ACCOUNT</MenuItem>
 					</MenuDesktop>
 				</Center>
 				<Right>
@@ -123,8 +133,8 @@ const Navbar = () => {
 			<MenuMobile opened={open.toString()}>
 				<MenuItem onClick={() => navigate("/menu")}>MENU</MenuItem>
 				<MenuItem onClick={() => navigate("/promotions")}>PROMOTIONS</MenuItem>
-				<MenuItem onClick={() => navigate("/gallery")}>GALLERY</MenuItem>
 				<MenuItem onClick={() => navigate("/contact")}>CONTACT</MenuItem>
+				<MenuItem onClick={() => navigate("/account")}>ACCOUNT</MenuItem>
 			</MenuMobile>
 		</Wrapper>
 	);
