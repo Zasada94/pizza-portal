@@ -105,7 +105,7 @@ const Button = styled.button`
 	transition: 0.5s ease-out;
 	&:hover {
 		background-color: white;
-		border: 2px solid #be3144;
+		border: 1px solid #be3144;
 		color: black;
 	}
 `;
