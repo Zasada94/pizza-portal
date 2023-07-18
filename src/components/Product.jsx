@@ -1,6 +1,7 @@
 import React from "react";
 import { styled } from "styled-components";
 import { full, mobile } from "../responsive";
+import { Link } from "react-router-dom";
 
 const ItemWrapper = styled.div`
 	display: flex;
@@ -105,7 +106,9 @@ const Product = () => {
 				<ItemDesc>Double: tomato sauce, mozarella, pepperoni</ItemDesc>
 				<OthersWrapper>
 					<Price>30 PLN</Price>
-					<AddButton>Dodaj +</AddButton>
+					<Link to={`/product/:id`}>
+						<AddButton>Add +</AddButton>
+					</Link>
 				</OthersWrapper>
 			</RightWrapper>
 		</ItemWrapper>
