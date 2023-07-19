@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { full, tablet } from "../responsive";
 import logo from "../images/logo.png";
+import { Badge } from "@mui/material";
+import CartIcon from "@mui/icons-material/ShoppingCartOutlined";
 
 const Wrapper = styled.div`
 	height: auto;
@@ -111,6 +113,17 @@ const Button = styled.button`
 `;
 
 const Navbar = () => {
+	const badgeStyle = {
+		"& .MuiBadge-badge": {
+			color: "white",
+			backgroundColor: "black",
+			width: "18px",
+			height: "18px",
+			minWidth: "unset",
+			padding: "0",
+			textAlign: "center",
+		},
+	};
 	const navigate = useNavigate();
 
 	const [open, setOpen] = useState(false);
@@ -141,7 +154,14 @@ const Navbar = () => {
 					</MenuDesktop>
 				</Center>
 				<Right>
-					<Button>ORDER ONLINE</Button>
+					<Link to={`/cart`}>
+						<Button>
+							ORDER
+							<Badge badgeContent={1} sx={badgeStyle}>
+								<CartIcon />
+							</Badge>
+						</Button>
+					</Link>
 				</Right>
 			</Container>
 			<MenuMobile opened={open.toString()}>
