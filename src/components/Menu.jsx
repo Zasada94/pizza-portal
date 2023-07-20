@@ -16,7 +16,7 @@ const Title = styled.h1`
 	font-weight: 500;
 	font-size: 30px;
 	align-self: start;
-	margin: 20px 0px 0 40px;
+	margin: 10px 0 0 40px;
 `;
 
 const Subtitle = styled.h2`

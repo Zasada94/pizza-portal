@@ -131,7 +131,9 @@ const Navbar = () => {
 	return (
 		<Wrapper>
 			<Container>
-				<LogoIcon src={logo}></LogoIcon>
+				<Link to={`/`}>
+					<LogoIcon src={logo}></LogoIcon>
+				</Link>
 				<Center opened={open.toString()}>
 					<Burger
 						onClick={() => {
@@ -156,7 +158,7 @@ const Navbar = () => {
 				<Right>
 					<Link to={`/cart`}>
 						<Button>
-							ORDER
+							ORDER{" "}
 							<Badge badgeContent={1} sx={badgeStyle}>
 								<CartIcon />
 							</Badge>
