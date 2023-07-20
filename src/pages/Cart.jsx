@@ -1,11 +1,14 @@
 import React from "react";
 import { styled } from "styled-components";
-import { mobile } from "../responsive";
+import { full, mobile } from "../responsive";
 import Navbar from "../components/Navbar";
 import { Add, Remove } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
-const Container = styled.div``;
+const Container = styled.div`
+	margin: 0 auto;
+	max-width: 1200px;
+`;
 
 const Wrapper = styled.div`
 	padding: 20px;
@@ -15,8 +18,10 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.h1`
-	font-weight: 300;
-	text-align: center;
+	font-weight: 500;
+	font-size: 30px;
+	align-self: start;
+	margin: 10px 0 0 15px;
 `;
 
 const Top = styled.div`
@@ -72,7 +77,20 @@ const Info = styled.div`
 const Product = styled.div`
 	display: flex;
 	justify-content: space-around;
+	border: 0.5px solid none;
+	border-radius: 15px;
+	box-shadow: 0 10px 45px 10px #26282b0f;
+	margin: 10px 10px;
+	padding: 5px;
+	flex-grow: 1;
+	flex-basis: 100%;
+	${full({
+		margin: "15px 20px",
+		flexBasis: "40%",
+	})}
 	${mobile({
+		margin: "10px 20px",
+		padding: "10px 10px",
 		flexDirection: "column",
 	})}
 `;
@@ -92,10 +110,15 @@ const Image = styled.img`
 `;
 
 const Details = styled.div`
-	padding: 20px;
+	padding: 10px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
+	font-size: 16px;
+	font-weight: 300;
+	${mobile({
+		fontSize: "14px",
+	})}
 `;
 
 const ProductName = styled.span``;
@@ -109,50 +132,60 @@ const PriceDetail = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
+	justify-content: space-around;
+	margin: 15px 0 5px;
+	${mobile({
+		flexDirection: "row",
+	})}
 `;
 
 const ProductAmountContainer = styled.div`
 	display: flex;
 	align-items: center;
-	margin-bottom: 20px;
 `;
 
 const ProductAmount = styled.div`
-	font-size: 24px;
-	margin: 5px;
-	${mobile({
-		margin: "5px 15px",
-	})}
+	width: 30px;
+	height: 30px;
+	border-radius: 10px;
+	border: 1px solid var(--red);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0px 5px;
 `;
 
 const ProductPrice = styled.div`
-	font-size: 26px;
-	font-weight: 200;
-	${mobile({
-		marginBottom: "20px",
-	})}
-`;
-
-const Hr = styled.hr`
-	background-color: #eee;
-	border: none;
-	height: 1px;
+	font-size: 20px;
+	font-weight: 300;
 `;
 
 const Summary = styled.div`
+	display: flex;
+	flex-direction: column;
 	flex: 1;
-	border: 0.5px solid lightgray;
-	border-radius: 10px;
-	padding: 20px;
+	border: 0.5px solid none;
+	border-radius: 15px;
+	margin: 10px 0;
+	padding: 10px 20px;
+	box-shadow: 0 10px 45px 10px #26282b0f;
+	${full({
+		margin: "15px 20px",
+	})}
+	${mobile({
+		margin: "10px 20px",
+		padding: "10px 20px",
+	})}
 `;
 
 const SummaryTitle = styled.h1`
-	font-weight: 200;
+	font-weight: 400;
+	font-size: 20px;
 `;
 
 const SummaryItem = styled.div`
-	margin: 30px 0;
+	font-weight: 300;
+	margin: 10px 0;
 	display: flex;
 	justify-content: space-between;
 	font-weight: ${(props) => props.type === "total" && "500"};
@@ -168,7 +201,7 @@ const SummaryButton = styled.button`
 	border: 1px solid rgba(0, 0, 0, 0);
 	border-radius: 10px;
 	padding: 8px;
-	margin: 10px;
+	align-self: center;
 	background-color: #be3144;
 	cursor: pointer;
 	font-weight: 500;
@@ -218,16 +251,15 @@ const Cart = () => {
 								<ProductPrice>30 PLN</ProductPrice>
 							</PriceDetail>
 						</Product>
-						<Hr />
 					</Info>
 					<Summary>
 						<SummaryTitle>ORDER SUMMARY</SummaryTitle>
 						<SummaryItem>
 							<SummaryItemText>Subtotal</SummaryItemText>
-							<SummaryItemPrice> SUM PLN</SummaryItemPrice>
+							<SummaryItemPrice> 30 PLN</SummaryItemPrice>
 						</SummaryItem>
 						<SummaryItem>
-							<SummaryItemText>Estimated delivery cost</SummaryItemText>
+							<SummaryItemText>Delivery cost</SummaryItemText>
 							<SummaryItemPrice> 20 PLN</SummaryItemPrice>
 						</SummaryItem>
 						<SummaryItem>
@@ -236,7 +268,7 @@ const Cart = () => {
 						</SummaryItem>
 						<SummaryItem type="total">
 							<SummaryItemText>Total</SummaryItemText>
-							<SummaryItemPrice>SUM PLN</SummaryItemPrice>
+							<SummaryItemPrice>30 PLN</SummaryItemPrice>
 						</SummaryItem>
 						<SummaryButton>ORDER NOW</SummaryButton>
 					</Summary>
