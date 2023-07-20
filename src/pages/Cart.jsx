@@ -3,6 +3,7 @@ import { styled } from "styled-components";
 import { mobile } from "../responsive";
 import Navbar from "../components/Navbar";
 import { Add, Remove } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 
 const Container = styled.div``;
 
@@ -26,18 +27,16 @@ const Top = styled.div`
 `;
 
 const LeftButton = styled.button`
-	padding: 10px;
-	font-weight: 600;
+	color: white;
+	padding: 8px;
+	background-color: var(--green);
 	cursor: pointer;
-	border: 1px solid black;
-	border-radius: 10px;
-	background-color: white;
-	color: black;
+	font-weight: 500;
 	transition: 0.5s ease-out;
+	border: none;
+	border-radius: 10px;
 	&:hover {
-		background-color: black;
-		border: 1px solid white;
-		color: white;
+		background-color: #aab800;
 	}
 `;
 
@@ -188,7 +187,9 @@ const Cart = () => {
 			<Wrapper>
 				<Title>YOUR CART</Title>
 				<Top>
-					<LeftButton>CONTINUE SHOPPING</LeftButton>
+					<Link to="/menu">
+						<LeftButton>CONTINUE SHOPPING</LeftButton>
+					</Link>
 					<RightButton>ORDER NOW</RightButton>
 				</Top>
 				<Bottom>

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { styled } from "styled-components";
 import Navbar from "../components/Navbar";
 import { mobile } from "../responsive";
+import CartButton from "../components/CartButton";
 
 const Container = styled.div``;
 
@@ -170,10 +171,11 @@ const Product = () => {
 							<Amount>{quantity}</Amount>
 							<Add onClick={() => handleQuantity("inc")} />
 						</AmountContainer>
-							<Button>ADD TO CART</Button>
+						<Button>ADD TO CART</Button>
 					</AddContainer>
 				</InfoContainer>
 			</Wrapper>
+			<CartButton />
 		</Container>
 	);
 };
