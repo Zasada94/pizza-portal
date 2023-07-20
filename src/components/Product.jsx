@@ -11,7 +11,6 @@ const ItemWrapper = styled.div`
 	box-shadow: 0 10px 45px 10px #26282b0f;
 	margin: 15px 40px;
 	padding: 15px 15px;
-	flex-grow: 1;
 	flex-basis: 100%;
 	${full({
 		margin: "15px 20px",
@@ -97,16 +96,16 @@ const AddButton = styled.button`
 	})}
 `;
 
-const Product = () => {
+const Product = ({ item }) => {
 	return (
 		<ItemWrapper>
-			<ItemImage src="https://i.ibb.co/bNVvQnK/Screenshot-1.png"></ItemImage>
+			<ItemImage src={item.img}></ItemImage>
 			<RightWrapper>
-				<ItemTitle>DOUBLE PEPERONI</ItemTitle>
-				<ItemDesc>Double: tomato sauce, mozarella, pepperoni</ItemDesc>
+				<ItemTitle>{item.title}</ItemTitle>
+				<ItemDesc>{item.desc}</ItemDesc>
 				<OthersWrapper>
-					<Price>30 PLN</Price>
-					<Link to={`/product/:id`}>
+					<Price>{item.price} PLN</Price>
+					<Link to={`/product/:${item._id}`}>
 						<AddButton>Add +</AddButton>
 					</Link>
 				</OthersWrapper>

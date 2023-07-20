@@ -1,7 +1,8 @@
 import { styled } from "styled-components";
 import LocalPizzaIcon from "@mui/icons-material/LocalPizza";
-import { full } from "../responsive";
+import axios from "axios";
 import Product from "./Product";
+import { useEffect, useState } from "react";
 
 const Container = styled.div`
 	display: flex;
@@ -34,6 +35,21 @@ const Wrapper = styled.div`
 `;
 
 const Menu = () => {
+	const [products, setProducts] = useState([]);
+
+	useEffect(() => {
+		const getProducts = async () => {
+			try {
+				const res = await axios.get(`http://localhost:5000/api/products`);
+				setProducts(res.data);
+			} catch (err) {
+				console.log(err);
+			}
+		};
+		getProducts();
+		console.log(products);
+	}, []);
+
 	return (
 		<Container>
 			<Title>Our menu:</Title>
@@ -42,10 +58,9 @@ const Menu = () => {
 				Pizza
 			</Subtitle>
 			<Wrapper>
-				<Product />
-				<Product />
-				<Product />
-				<Product />
+				{products.map((item) => (
+					<Product item={item} key={item._id} />
+				))}
 			</Wrapper>
 		</Container>
 	);
