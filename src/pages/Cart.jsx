@@ -4,6 +4,7 @@ import { full, mobile } from "../responsive";
 import Navbar from "../components/Navbar";
 import { Add, Remove } from "@mui/icons-material";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Container = styled.div`
 	margin: 0 auto;
@@ -214,6 +215,9 @@ const SummaryButton = styled.button`
 `;
 
 const Cart = () => {
+	const cart = useSelector((state) => state.cart);
+	console.log(cart);
+
 	return (
 		<Container>
 			<Navbar />
@@ -227,30 +231,32 @@ const Cart = () => {
 				</Top>
 				<Bottom>
 					<Info>
-						<Product>
-							<ProductDetail>
-								<Image src="https://i.ibb.co/bNVvQnK/Screenshot-1.png" />
-								<Details>
-									<ProductName>
-										<b>Product:</b> Double Pepperoni
-									</ProductName>
-									<ProductId>
-										<b>ID:</b> 123456789
-									</ProductId>
-									<ProductSize>
-										<b>Size:</b> LARGE 50cm
-									</ProductSize>
-								</Details>
-							</ProductDetail>
-							<PriceDetail>
-								<ProductAmountContainer>
-									<Add />
-									<ProductAmount>1</ProductAmount>
-									<Remove />
-								</ProductAmountContainer>
-								<ProductPrice>30 PLN</ProductPrice>
-							</PriceDetail>
-						</Product>
+						{cart.products.map((product) => (
+							<Product>
+								<ProductDetail>
+									<Image src="https://i.ibb.co/bNVvQnK/Screenshot-1.png" />
+									<Details>
+										<ProductName>
+											<b>Product:</b> Double Pepperoni
+										</ProductName>
+										<ProductId>
+											<b>ID:</b> 123456789
+										</ProductId>
+										<ProductSize>
+											<b>Size:</b> LARGE 50cm
+										</ProductSize>
+									</Details>
+								</ProductDetail>
+								<PriceDetail>
+									<ProductAmountContainer>
+										<Add />
+										<ProductAmount>1</ProductAmount>
+										<Remove />
+									</ProductAmountContainer>
+									<ProductPrice>30 PLN</ProductPrice>
+								</PriceDetail>
+							</Product>
+						))}
 					</Info>
 					<Summary>
 						<SummaryTitle>ORDER SUMMARY</SummaryTitle>
