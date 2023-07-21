@@ -234,7 +234,7 @@ const Cart = () => {
 						{cart.products.map((product) => (
 							<Product>
 								<ProductDetail>
-									<Image src="https://i.ibb.co/bNVvQnK/Screenshot-1.png" />
+									<Image src={product.img} />
 									<Details>
 										<ProductName>
 											<b>Product:</b> Double Pepperoni

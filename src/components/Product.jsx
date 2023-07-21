@@ -105,7 +105,7 @@ const Product = ({ item }) => {
 				<ItemDesc>{item.desc}</ItemDesc>
 				<OthersWrapper>
 					<Price>{item.price} PLN</Price>
-					<Link to={`/product/:${item._id}`}>
+					<Link to={`/product/${item._id}`}>
 						<AddButton>Add +</AddButton>
 					</Link>
 				</OthersWrapper>

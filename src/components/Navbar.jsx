@@ -5,6 +5,7 @@ import { full, tablet } from "../responsive";
 import logo from "../images/logo.png";
 import { Badge } from "@mui/material";
 import CartIcon from "@mui/icons-material/ShoppingCartOutlined";
+import { useSelector } from "react-redux";
 
 const Wrapper = styled.div`
 	height: auto;
@@ -20,7 +21,8 @@ const Container = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	position: reltive;
+	position: relative;
+	max-width: 1200px;
 `;
 
 const LogoIcon = styled.img`
@@ -127,6 +129,8 @@ const Navbar = () => {
 	const navigate = useNavigate();
 
 	const [open, setOpen] = useState(false);
+
+	// const quantity = useSelector((state) => state.cart.quantity);
 
 	return (
 		<Wrapper>

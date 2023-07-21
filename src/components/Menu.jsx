@@ -3,6 +3,7 @@ import LocalPizzaIcon from "@mui/icons-material/LocalPizza";
 import axios from "axios";
 import Product from "./Product";
 import { useEffect, useState } from "react";
+import { publicRequest } from "../requestMethods";
 
 const Container = styled.div`
 	display: flex;
@@ -32,6 +33,7 @@ const Subtitle = styled.h2`
 const Wrapper = styled.div`
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: space-around;
 `;
 
 const Menu = () => {
@@ -40,14 +42,14 @@ const Menu = () => {
 	useEffect(() => {
 		const getProducts = async () => {
 			try {
-				const res = await axios.get(`http://localhost:5000/api/products`);
+				const res = await publicRequest.get(`/products`);
 				setProducts(res.data);
+				// !!products ? console.log(products) : "";
 			} catch (err) {
 				console.log(err);
 			}
 		};
 		getProducts();
-		console.log(products);
 	}, []);
 
 	return (

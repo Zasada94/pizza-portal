@@ -1,11 +1,13 @@
 import { Add, Remove } from "@mui/icons-material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { styled } from "styled-components";
 import Navbar from "../components/Navbar";
 import { mobile } from "../responsive";
 import CartButton from "../components/CartButton";
 import { addProduct } from "../redux/cartRedux";
 import { useDispatch } from "react-redux";
+import { useLocation } from "react-router-dom";
+import { publicRequest } from "../requestMethods";
 
 const Container = styled.div``;
 
@@ -136,6 +138,8 @@ const Button = styled.button`
 `;
 
 const Product = () => {
+	const location = useLocation();
+	const id = location.pathname.split("/")[2];
 	const [product, setProduct] = useState({});
 	const [quantity, setQuantity] = useState(1);
 	const [size, setSize] = useState("");
@@ -151,6 +155,18 @@ const Product = () => {
 		}
 	};
 
+	useEffect(() => {
+		const getProduct = async () => {
+			try {
+				const res = await publicRequest.get("/products/find/" + id);
+				setProduct(res.data);
+			} catch (err) {
+				console.log(err);
+			}
+		};
+		getProduct();
+	}, [id]);
+
 	const handleClick = () => {
 		dispatch(addProduct({ ...product, quantity, size }));
 	};
@@ -160,11 +176,11 @@ const Product = () => {
 			<Navbar />
 			<Wrapper>
 				<ImgContainer>
-					<Image src="https://i.ibb.co/bNVvQnK/Screenshot-1.png" />
+					<Image src={product.img} />
 				</ImgContainer>
 				<InfoContainer>
-					<Title>Double Pepperoni</Title>
-					<Desc>Double: tomato sauce, mozarella, pepperoni</Desc>
+					<Title>{product.title}</Title>
+					<Desc>{product.desc}</Desc>
 					<Filter>
 						<FilterTitle>Size</FilterTitle>
 						<FilterSize
@@ -172,9 +188,9 @@ const Product = () => {
 								setSize(e.target.value);
 							}}
 						>
-							<FilterSizeOption>SMALL 30cm</FilterSizeOption>
-							<FilterSizeOption>MEDIUM 40cm</FilterSizeOption>
-							<FilterSizeOption>LARGE 50cm</FilterSizeOption>
+							{product.size?.map((size) => (
+								<FilterSizeOption key={size}>{size}</FilterSizeOption>
+							))}
 						</FilterSize>
 					</Filter>
 					<AddContainer>
