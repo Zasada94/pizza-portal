@@ -5,6 +5,7 @@ import { Add, Remove } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { increaseAmount, decreaseAmount } from "../redux/cartRedux";
+import Navbar from "../components/Navbar";
 
 const Container = styled.div`
 	margin: 0 auto;
@@ -220,8 +221,9 @@ const Cart = () => {
 
 	return (
 		<Container>
+			<Navbar />
 			<Wrapper>
-				<Title>YOUR CART</Title>
+				<Title>Your cart:</Title>
 				<Top>
 					<Link to="/menu">
 						<LeftButton>CONTINUE SHOPPING</LeftButton>
@@ -285,7 +287,7 @@ const Cart = () => {
 							<SummaryItemText>Total</SummaryItemText>
 							<SummaryItemPrice>{cart.total} PLN</SummaryItemPrice>
 						</SummaryItem>
-						<Link to={`/order`}>
+						<Link to={`/order`} style={{ alignSelf: "center" }}>
 							<SummaryButton>ORDER NOW</SummaryButton>
 						</Link>
 					</Summary>

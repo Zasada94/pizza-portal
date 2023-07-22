@@ -142,7 +142,7 @@ const Product = () => {
 	const id = location.pathname.split("/")[2];
 	const [product, setProduct] = useState({});
 	const [quantity, setQuantity] = useState(1);
-	const [size, setSize] = useState("");
+	const [size, setSize] = useState("M");
 	const dispatch = useDispatch();
 
 	const handleQuantity = (type) => {
