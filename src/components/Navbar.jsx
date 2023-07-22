@@ -130,7 +130,7 @@ const Navbar = () => {
 
 	const [open, setOpen] = useState(false);
 
-	// const quantity = useSelector((state) => state.cart.quantity);
+	const quantity = useSelector((state) => state.cart.quantity);
 
 	return (
 		<Wrapper>
@@ -163,7 +163,7 @@ const Navbar = () => {
 					<Link to={`/cart`}>
 						<Button>
 							ORDER{" "}
-							<Badge badgeContent={1} sx={badgeStyle}>
+							<Badge badgeContent={quantity} sx={badgeStyle}>
 								<CartIcon />
 							</Badge>
 						</Button>

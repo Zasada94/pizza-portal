@@ -6,6 +6,7 @@ import Contact from "./pages/Contact";
 import Promotions from "./pages/Promotions";
 import Product from "./pages/Product";
 import Cart from "./pages/Cart";
+import OrderPage from "./pages/OrderPage";
 
 function App() {
 	return (
@@ -19,6 +20,7 @@ function App() {
 				<Route path="/contact" element={<Contact />} />
 				<Route path="/product/:id" element={<Product />} />
 				<Route path="cart" element={<Cart />} />
+				<Route path="order" element={<OrderPage />} />
 			</Routes>
 		</Router>
 	);

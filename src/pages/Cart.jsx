@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "styled-components";
 import { full, mobile } from "../responsive";
-import Navbar from "../components/Navbar";
 import { Add, Remove } from "@mui/icons-material";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { increaseAmount, decreaseAmount } from "../redux/cartRedux";
 
 const Container = styled.div`
 	margin: 0 auto;
@@ -215,12 +215,11 @@ const SummaryButton = styled.button`
 `;
 
 const Cart = () => {
+	const dispatch = useDispatch();
 	const cart = useSelector((state) => state.cart);
-	console.log(cart);
 
 	return (
 		<Container>
-			<Navbar />
 			<Wrapper>
 				<Title>YOUR CART</Title>
 				<Top>
@@ -231,29 +230,39 @@ const Cart = () => {
 				</Top>
 				<Bottom>
 					<Info>
-						{cart.products.map((product) => (
-							<Product>
+						{cart.products.map((product, index) => (
+							<Product key={index}>
 								<ProductDetail>
 									<Image src={product.img} />
 									<Details>
 										<ProductName>
-											<b>Product:</b> Double Pepperoni
+											<b>Product:</b> {product.title}
 										</ProductName>
 										<ProductId>
-											<b>ID:</b> 123456789
+											<b>ID:</b> {product._id}
 										</ProductId>
 										<ProductSize>
-											<b>Size:</b> LARGE 50cm
+											<b>Size:</b> {product.size}
 										</ProductSize>
 									</Details>
 								</ProductDetail>
 								<PriceDetail>
 									<ProductAmountContainer>
-										<Add />
-										<ProductAmount>1</ProductAmount>
-										<Remove />
+										<Add
+											onClick={() => {
+												dispatch(increaseAmount({ ...product }));
+											}}
+										/>
+										<ProductAmount>{product.quantity}</ProductAmount>
+										<Remove
+											onClick={() => {
+												dispatch(decreaseAmount({ ...product }));
+											}}
+										/>
 									</ProductAmountContainer>
-									<ProductPrice>30 PLN</ProductPrice>
+									<ProductPrice>
+										{product.price * product.quantity} PLN
+									</ProductPrice>
 								</PriceDetail>
 							</Product>
 						))}
@@ -262,7 +271,7 @@ const Cart = () => {
 						<SummaryTitle>ORDER SUMMARY</SummaryTitle>
 						<SummaryItem>
 							<SummaryItemText>Subtotal</SummaryItemText>
-							<SummaryItemPrice> 30 PLN</SummaryItemPrice>
+							<SummaryItemPrice> {cart.total} PLN</SummaryItemPrice>
 						</SummaryItem>
 						<SummaryItem>
 							<SummaryItemText>Delivery cost</SummaryItemText>
@@ -274,9 +283,11 @@ const Cart = () => {
 						</SummaryItem>
 						<SummaryItem type="total">
 							<SummaryItemText>Total</SummaryItemText>
-							<SummaryItemPrice>30 PLN</SummaryItemPrice>
+							<SummaryItemPrice>{cart.total} PLN</SummaryItemPrice>
 						</SummaryItem>
-						<SummaryButton>ORDER NOW</SummaryButton>
+						<Link to={`/order`}>
+							<SummaryButton>ORDER NOW</SummaryButton>
+						</Link>
 					</Summary>
 				</Bottom>
 			</Wrapper>
