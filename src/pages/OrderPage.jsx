@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Navbar from "../components/Navbar";
 import { useState } from "react";
+import { publicRequest } from "../requestMethods";
 
 const Container = styled.div`
 	margin: 0 auto;
@@ -12,6 +13,8 @@ const Container = styled.div`
 
 const Wrapper = styled.div`
 	padding: 20px;
+	display: flex;
+	flex-direction: column;
 	${mobile({
 		padding: "10px",
 	})}
@@ -71,7 +74,7 @@ const Bottom = styled.div`
 `;
 
 const Info = styled.div`
-	flex: 3;
+	flex: 1;
 `;
 
 const Product = styled.div`
@@ -111,7 +114,7 @@ const ProductInfo = styled.div`
 const Summary = styled.div`
 	display: flex;
 	flex-direction: column;
-	flex: 1;
+	flex: 3;
 	border: 0.5px solid none;
 	border-radius: 15px;
 	margin: 10px 0;
@@ -147,11 +150,11 @@ const SummaryButton = styled.button`
 	border: 1px solid rgba(0, 0, 0, 0);
 	border-radius: 10px;
 	padding: 8px;
-	align-self: center;
 	background-color: #be3144;
 	cursor: pointer;
 	font-weight: 500;
 	transition: 0.5s ease-out;
+	align-self: center;
 	&:hover {
 		background-color: white;
 		border: 1px solid #be3144;
@@ -160,18 +163,48 @@ const SummaryButton = styled.button`
 `;
 
 const OrderData = styled.div``;
+
 const Form = styled.form``;
+
 const PaymentWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 `;
 const PaymentItem = styled.div`
+	text-align: center;
 	display: flex;
+	margin: 5px;
+	border: ${(props) =>
+		!!props.checked ? "1px solid var(--green)" : "1px solid lightgrey"};
+	border-radius: 5px;
 `;
-const PaymentTitle = styled.h3``;
-const PaymentInput = styled.input``;
-const TermInput = styled.input``;
-const PaymentLabel = styled.label``;
+const PaymentTitle = styled.h3`
+	margin: 5px;
+	margin-top: 10px;
+`;
+const PaymentInput = styled.input`
+	text-align: center;
+	margin: 5px;
+	cursor: pointer;
+`;
+const PaymentLabel = styled.label`
+	margin-right: 5px;
+	padding: 3px 5px;
+	margin-left: 5px;
+	margin: 5px 0;
+`;
+const TermInput = styled.input`
+	flex-grow: 1;
+	padding: 3px 5px;
+	margin: 5px;
+	border: none;
+	border-radius: 5px;
+	background-color: #f6f6f6;
+	cursor: pointer;
+	&::placeholder {
+		color: black;
+	}
+`;
 
 const OrderPage = () => {
 	const cart = useSelector((state) => state.cart);
@@ -181,11 +214,14 @@ const OrderPage = () => {
 
 	const [deliveryChecked, setDeliveryChecked] = useState(false);
 	const [deliveryChecked2, setDeliveryChecked2] = useState(false);
-	const [deliveryChecked3, setDeliveryChecked3] = useState(false);
 
 	const [termChecked, setTermChecked] = useState(false);
 	const [termChecked2, setTermChecked2] = useState(false);
 	const [customTerm, setCustomTerm] = useState("");
+	const [name, setName] = useState("");
+	const [phone, setPhone] = useState("");
+	const [email, setEmail] = useState("");
+	const [adress, setAdress] = useState("");
 
 	const handlePayChange = () => {
 		setPayChecked(!payChecked);
@@ -204,28 +240,56 @@ const OrderPage = () => {
 	};
 
 	const handleDeliveryChange = () => {
-		setDeliveryChecked(!payChecked);
+		setDeliveryChecked(!deliveryChecked);
 		setDeliveryChecked2(false);
-		setDeliveryChecked3(false);
 	};
 	const handleDeliveryChange2 = () => {
-		setDeliveryChecked2(!payChecked2);
+		setDeliveryChecked2(!deliveryChecked2);
 		setDeliveryChecked(false);
-		setDeliveryChecked3(false);
-	};
-	const handleDeliveryChange3 = () => {
-		setDeliveryChecked3(!payChecked3);
-		setDeliveryChecked(false);
-		setDeliveryChecked2(false);
 	};
 
 	const handleTermChange = () => {
-		setTermChecked(!payChecked);
+		setTermChecked(!termChecked);
 		setTermChecked2(false);
 	};
 	const handleTermChange2 = () => {
-		setTermChecked2(!payChecked2);
+		setTermChecked2(!termChecked2);
 		setTermChecked(false);
+	};
+
+	const handleOrder = async () => {
+		if (
+			!!payChecked ||
+			!!payChecked2 ||
+			(!!payChecked3 && !!cart.total && !!deliveryChecked) ||
+			(deliveryChecked2 && !!termChecked) ||
+			!!termChecked2
+		) {
+			try {
+				const res = await publicRequest.post("/orders", {
+					products: cart.products.map((item) => ({
+						productId: item._id,
+						quantity: item.quantity,
+						size: item.size,
+					})),
+					total: cart.total,
+					online: !!payChecked,
+					card: !!payChecked2,
+					cash: !!payChecked3,
+					delivery: !!deliveryChecked,
+					address: adress,
+					ASAP: !!termChecked,
+					term: customTerm,
+					name: name,
+					phone: phone,
+					email: email,
+				});
+			} catch (err) {
+				console.log(err);
+			}
+		} else {
+			console.log("give all neccessary data");
+		}
 	};
 
 	return (
@@ -250,7 +314,7 @@ const OrderPage = () => {
 							<Form>
 								<PaymentWrapper>
 									<PaymentTitle>Payment</PaymentTitle>
-									<PaymentItem>
+									<PaymentItem checked={payChecked}>
 										<PaymentInput
 											type="checkbox"
 											checked={payChecked}
@@ -258,7 +322,7 @@ const OrderPage = () => {
 										></PaymentInput>
 										<PaymentLabel>Online (recommended)</PaymentLabel>
 									</PaymentItem>
-									<PaymentItem>
+									<PaymentItem checked={payChecked2}>
 										<PaymentInput
 											type="checkbox"
 											checked={payChecked2}
@@ -266,7 +330,7 @@ const OrderPage = () => {
 										></PaymentInput>
 										<PaymentLabel>Card (on delivery)</PaymentLabel>
 									</PaymentItem>
-									<PaymentItem>
+									<PaymentItem checked={payChecked3}>
 										<PaymentInput
 											type="checkbox"
 											checked={payChecked3}
@@ -277,7 +341,7 @@ const OrderPage = () => {
 								</PaymentWrapper>
 								<PaymentWrapper>
 									<PaymentTitle>Delivery</PaymentTitle>
-									<PaymentItem>
+									<PaymentItem checked={deliveryChecked}>
 										<PaymentInput
 											type="checkbox"
 											checked={deliveryChecked}
@@ -285,7 +349,7 @@ const OrderPage = () => {
 										></PaymentInput>
 										<PaymentLabel>Adress delivered</PaymentLabel>
 									</PaymentItem>
-									<PaymentItem>
+									<PaymentItem checked={deliveryChecked2}>
 										<PaymentInput
 											type="checkbox"
 											checked={deliveryChecked2}
@@ -293,18 +357,10 @@ const OrderPage = () => {
 										></PaymentInput>
 										<PaymentLabel>personal pickup</PaymentLabel>
 									</PaymentItem>
-									<PaymentItem>
-										<PaymentInput
-											type="checkbox"
-											checked={deliveryChecked3}
-											onChange={handleDeliveryChange3}
-										></PaymentInput>
-										<PaymentLabel>cash (on delivery)</PaymentLabel>
-									</PaymentItem>
 								</PaymentWrapper>
 								<PaymentWrapper>
 									<PaymentTitle>Term</PaymentTitle>
-									<PaymentItem>
+									<PaymentItem checked={termChecked}>
 										<PaymentInput
 											type="checkbox"
 											checked={termChecked}
@@ -312,49 +368,84 @@ const OrderPage = () => {
 										></PaymentInput>
 										<PaymentLabel>As soon as possible</PaymentLabel>
 									</PaymentItem>
-									<PaymentItem>
+									<PaymentItem checked={termChecked2}>
 										<PaymentInput
 											type="checkbox"
 											checked={termChecked2}
 											onChange={handleTermChange2}
 										></PaymentInput>
 										<PaymentLabel>Choose term</PaymentLabel>
+										{termChecked2 && (
+											<TermInput
+												type="text"
+												placeholder="Type date and time here..."
+												onChange={(e) => setCustomTerm(e.target.value)}
+											></TermInput>
+										)}
 									</PaymentItem>
+								</PaymentWrapper>
+								<PaymentWrapper>
+									<PaymentTitle>Contact Data</PaymentTitle>
 									<PaymentItem>
+										<PaymentLabel>Name: </PaymentLabel>
 										<TermInput
 											type="text"
-											placeholder="Type date and time here..."
-											onChange={(e) => setCustomTerm(e.target.value)}
+											placeholder="Type name here..."
+											onChange={(e) => setName(e.target.value)}
 										></TermInput>
 									</PaymentItem>
+									<PaymentItem>
+										<PaymentLabel>Phone: </PaymentLabel>
+										<TermInput
+											type="text"
+											placeholder="Type phone number here..."
+											onChange={(e) => setPhone(e.target.value)}
+										></TermInput>
+									</PaymentItem>
+									<PaymentItem>
+										<PaymentLabel>E-mail: </PaymentLabel>
+										<TermInput
+											type="text"
+											placeholder="Type e-mail here..."
+											onChange={(e) => setEmail(e.target.value)}
+										></TermInput>
+									</PaymentItem>
+									{deliveryChecked && (
+										<PaymentItem>
+											<PaymentLabel>Adress: </PaymentLabel>
+											<TermInput
+												type="text"
+												placeholder="Type adress here..."
+												onChange={(e) => setAdress(e.target.value)}
+											></TermInput>
+										</PaymentItem>
+									)}
 								</PaymentWrapper>
 							</Form>
 						</OrderData>
-						<Link to={`/order`} style={{ alignSelf: "center" }}>
-							<SummaryButton>CONFIRM ORDER</SummaryButton>
-						</Link>
 					</Summary>
+					<Info>
+						{cart.products.map((product) => (
+							<Product key={product._id}>
+								<ProductDetail>
+									<ProductInfo>
+										<b>Product:</b> {product.title}
+									</ProductInfo>
+									<ProductInfo>
+										<b>Size:</b> {product.size}
+									</ProductInfo>
+									<ProductInfo>
+										<b>Quantity:</b> {product.quantity}
+									</ProductInfo>
+									<ProductInfo>
+										<b>Price:</b> {product.price * product.quantity} PLN
+									</ProductInfo>
+								</ProductDetail>
+							</Product>
+						))}
+					</Info>
 				</Bottom>
-				<Info>
-					{cart.products.map((product, index) => (
-						<Product key={index}>
-							<ProductDetail>
-								<ProductInfo>
-									<b>Product:</b> {product.title}
-								</ProductInfo>
-								<ProductInfo>
-									<b>Size:</b> {product.size}
-								</ProductInfo>
-								<ProductInfo>
-									<b>Quantity:</b> {product.quantity}
-								</ProductInfo>
-								<ProductInfo>
-									<b>Price:</b> {product.price * product.quantity} PLN
-								</ProductInfo>
-							</ProductDetail>
-						</Product>
-					))}
-				</Info>
+				<SummaryButton onClick={handleOrder}>CONFIRM ORDER</SummaryButton>
 			</Wrapper>
 		</Container>
 	);
