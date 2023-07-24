@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { full, tablet } from "../responsive";
-import logo from "../../public/logo.png";
+import logo from "/logo.png";
 import { Badge } from "@mui/material";
 import CartIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { useSelector } from "react-redux";
