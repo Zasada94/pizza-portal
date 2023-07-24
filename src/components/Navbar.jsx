@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { full, tablet } from "../responsive";
-import logo from "/logo.png";
 import { Badge } from "@mui/material";
 import CartIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { useSelector } from "react-redux";
@@ -136,7 +135,7 @@ const Navbar = () => {
 		<Wrapper>
 			<Container>
 				<Link to={`/`}>
-					<LogoIcon src={logo}></LogoIcon>
+					<LogoIcon src="https://i.ibb.co/D5bKZB1/logo.png"></LogoIcon>
 				</Link>
 				<Center opened={open.toString()}>
 					<Burger
