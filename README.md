@@ -10,7 +10,7 @@ React ordering pizza app (project in development).
 ## Live
 https://double-pizza.netlify.app/
 
-## How To Install
+## HowToInstall
 
 - open code editor,
 - open terminal and navigate to folder where You want project copied,
