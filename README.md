@@ -3,7 +3,7 @@ React ordering pizza app (project in development).
 
 ## Table of contents
 - [Live](#live)
-- [How To Install](#howtoinstall)
+- [How To Install](#how)
 - [Technologies](#technologies)
 - [Functionalities](#functionalities)
 
