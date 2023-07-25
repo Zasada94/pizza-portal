@@ -1,4 +1,4 @@
-# pizza-portal
+# Double Pizza
 React ordering pizza app (project in development).
 
 ## Table of contents
