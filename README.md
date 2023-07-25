@@ -3,14 +3,14 @@ React ordering pizza app (project in development).
 
 ## Table of contents
 - [Live](#live)
-- [HowToInstall](#how)
+- [How To Install](#howtoinstall)
 - [Technologies](#technologies)
 - [Functionalities](#functionalities)
 
 ## Live
 https://double-pizza.netlify.app/
 
-## HowToInstall
+## How To Install
 
 - open code editor,
 - open terminal and navigate to folder where You want project copied,
