@@ -3,6 +3,7 @@ import Swiper from "swiper/bundle";
 
 // import styles bundle
 import "swiper/css/bundle";
+import { full } from "../responsive";
 
 // init Swiper:
 const swiper = new Swiper(".swiper", {
@@ -24,6 +25,10 @@ const Container = styled.div`
 	height: auto;
 	aspect-ratio: 16/9;
 	border: none;
+	${full({
+		aspectRatio: "auto",
+		maxHeight: "90vh",
+	})}
 `;
 
 const Wrapper = styled.div``;
