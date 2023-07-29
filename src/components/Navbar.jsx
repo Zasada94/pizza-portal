@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { full, tablet } from "../responsive";
+import { full, mobile, tablet } from "../responsive";
 import { Badge } from "@mui/material";
 import CartIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { useSelector } from "react-redux";
@@ -22,11 +22,18 @@ const Container = styled.div`
 	justify-content: space-between;
 	position: relative;
 	max-width: 1200px;
+	${mobile({
+		height: "50px",
+	})}
 `;
 
 const LogoIcon = styled.img`
 	height: 60px;
 	margin-left: 5px;
+	align-self: center;
+	${mobile({
+		height: "50px",
+	})}
 `;
 
 const Center = styled.div`
