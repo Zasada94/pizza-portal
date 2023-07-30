@@ -1,62 +1,59 @@
-import { styled } from "styled-components";
-import Swiper from "swiper/bundle";
-
-// import styles bundle
-import "swiper/css/bundle";
+import React, { useState, useEffect } from "react";
+import styled, { keyframes } from "styled-components";
 import { full } from "../responsive";
 
-// init Swiper:
-const swiper = new Swiper(".swiper", {
-	// Optional parameters
-	direction: "horizontal",
-	loop: true,
-	autoplay: {
-		delay: 5000,
-	},
-	// Navigation arrows
-	// navigation: {
-	// 	nextEl: ".swiper-button-next",
-	// 	prevEl: ".swiper-button-prev",
-	// },
-});
-
 const Container = styled.div`
+	position: relative;
 	max-width: 100%;
 	height: auto;
 	aspect-ratio: 16/9;
 	border: none;
+	overflow: hidden;
 	${full({
 		aspectRatio: "auto",
 		maxHeight: "90vh",
 	})}
 `;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+	display: flex;
+	transition: transform 1s ease;
+	transform: ${({ currentslide }) => `translateX(-${100 * currentslide}%)`};
+`;
 
-const Slide = styled.div``;
+const Slide = styled.div`
+	flex-shrink: 0;
+	width: 100%;
+`;
 
 const SlideImg = styled.img`
 	width: 100%;
 `;
 
 const Gallery = () => {
+	const [currentSlide, setCurrentSlide] = useState(0);
+
+	useEffect(() => {
+		const interval = setInterval(() => {
+			setCurrentSlide((prevSlide) => (prevSlide + 1) % 3);
+		}, 5000); 
+
+		return () => clearInterval(interval);
+	}, []);
+
 	return (
-		<Container className="swiper">
-			<Wrapper className="swiper-wrapper">
-				<Slide className="swiper-slide">
-					<SlideImg src="../../public/img/pizzaslider1.jpg" alt="" />
+		<Container>
+			<Wrapper currentslide={currentSlide}>
+				<Slide>
+					<SlideImg src="https://i.ibb.co/x7NJpsp/pizzaslider1.jpg" alt="" />
 				</Slide>
-				<Slide className="swiper-slide">
-					<SlideImg src="../../public/img/pizzaslider2.jpg" alt="" />
+				<Slide>
+					<SlideImg src="https://i.ibb.co/80N43zD/pizzaslider2.jpg" alt="" />
 				</Slide>
-				<Slide className="swiper-slide">
-					<SlideImg src="../../public/img/pizzaslider3.jpg" alt="" />
+				<Slide>
+					<SlideImg src="https://i.ibb.co/zGT4bnq/pizzaslider3.jpg" alt="" />
 				</Slide>
 			</Wrapper>
-
-			{/* <!-- If we need navigation buttons --> */}
-			{/* <div className="swiper-button-prev"></div>
-			<div className="swiper-button-next"></div> */}
 		</Container>
 	);
 };
