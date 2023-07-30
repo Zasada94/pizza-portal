@@ -25,7 +25,7 @@ const Button = styled.button`
 const CartButton = () => {
 	return (
 		<Link to={`/cart`}>
-			<Button>SHOW CART</Button>;
+			<Button>SHOW CART</Button>
 		</Link>
 	);
 };

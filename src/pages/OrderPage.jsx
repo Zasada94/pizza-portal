@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import Navbar from "../components/Navbar";
 import { useState } from "react";
 import { publicRequest } from "../requestMethods";
+import Footer from "../components/Footer";
 
 const Container = styled.div`
 	margin: 0 auto;
@@ -447,7 +448,9 @@ const OrderPage = () => {
 				</Bottom>
 				<SummaryButton onClick={handleOrder}>CONFIRM ORDER</SummaryButton>
 			</Wrapper>
+			<Footer/>
 		</Container>
+
 	);
 };
 
