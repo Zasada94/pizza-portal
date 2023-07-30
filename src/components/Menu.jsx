@@ -44,7 +44,6 @@ const Menu = () => {
 			try {
 				const res = await publicRequest.get(`/products`);
 				setProducts(res.data);
-				// !!products ? console.log(products) : "";
 			} catch (err) {
 				console.log(err);
 			}

@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { increaseAmount, decreaseAmount } from "../redux/cartRedux";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 const Container = styled.div`
 	margin: 0 auto;
@@ -228,7 +229,8 @@ const Cart = () => {
 					<Link to="/menu">
 						<LeftButton>CONTINUE SHOPPING</LeftButton>
 					</Link>
-					<RightButton>ORDER NOW</RightButton>
+					<Link to={`/order`} style={{ alignSelf: "center" }}>
+					<RightButton>ORDER NOW</RightButton></Link>
 				</Top>
 				<Bottom>
 					<Info>
@@ -293,6 +295,7 @@ const Cart = () => {
 					</Summary>
 				</Bottom>
 			</Wrapper>
+			<Footer/>
 		</Container>
 	);
 };

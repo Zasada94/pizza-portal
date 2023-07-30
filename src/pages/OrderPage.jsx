@@ -167,6 +167,11 @@ const OrderData = styled.div``;
 
 const Form = styled.form``;
 
+const ErrorWrapper = styled.div`
+font-weight: 600;
+	color: red;
+`;
+
 const PaymentWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -174,7 +179,10 @@ const PaymentWrapper = styled.div`
 const PaymentItem = styled.div`
 	text-align: center;
 	display: flex;
+	align-items: center;
 	margin: 5px;
+	padding: 5px;
+	overflow: hidden;
 	border: ${(props) =>
 		!!props.checked ? "1px solid var(--green)" : "1px solid lightgrey"};
 	border-radius: 5px;
@@ -186,14 +194,11 @@ const PaymentTitle = styled.h3`
 const PaymentInput = styled.input`
 	text-align: center;
 	margin: 5px;
+
 	cursor: pointer;
 `;
-const PaymentLabel = styled.label`
-	margin-right: 5px;
-	padding: 3px 5px;
-	margin-left: 5px;
-	margin: 5px 0;
-`;
+const PaymentLabel = styled.label``;
+
 const TermInput = styled.input`
 	flex-grow: 1;
 	padding: 3px 5px;
@@ -223,6 +228,7 @@ const OrderPage = () => {
 	const [phone, setPhone] = useState("");
 	const [email, setEmail] = useState("");
 	const [adress, setAdress] = useState("");
+	const [isError, setIsError] = useState(false);
 
 	const handlePayChange = () => {
 		setPayChecked(!payChecked);
@@ -260,36 +266,44 @@ const OrderPage = () => {
 
 	const handleOrder = async () => {
 		if (
-			!!payChecked ||
-			!!payChecked2 ||
-			(!!payChecked3 && !!cart.total && !!deliveryChecked) ||
-			(deliveryChecked2 && !!termChecked) ||
-			!!termChecked2
+			(!!payChecked || !!payChecked2 || !!payChecked3) &&
+			!!cart.total &&
+			(!!deliveryChecked || (deliveryChecked2 && !!adress)) &&
+			(!!termChecked || (!!termChecked2 && !!customTerm)) &&
+			!!name &&
+			!!phone &&
+			!!email
 		) {
-			try {
-				const res = await publicRequest.post("/orders", {
-					products: cart.products.map((item) => ({
-						productId: item._id,
-						quantity: item.quantity,
-						size: item.size,
-					})),
-					total: cart.total,
-					online: !!payChecked,
-					card: !!payChecked2,
-					cash: !!payChecked3,
-					delivery: !!deliveryChecked,
-					address: adress,
-					ASAP: !!termChecked,
-					term: customTerm,
-					name: name,
-					phone: phone,
-					email: email,
-				});
-			} catch (err) {
-				console.log(err);
-			}
+			// try {
+			// 	const res = await publicRequest.post("/orders", {
+			// 		products: cart.products.map((item) => ({
+			// 			productId: item._id,
+			// 			quantity: item.quantity,
+			// 			size: item.size,
+			// 		})),
+			// 		total: cart.total,
+			// 		online: !!payChecked,
+			// 		card: !!payChecked2,
+			// 		cash: !!payChecked3,
+			// 		delivery: !!deliveryChecked,
+			// 		address: adress,
+			// 		ASAP: !!termChecked,
+			// 		term: customTerm,
+			// 		name: name,
+			// 		phone: phone,
+			// 		email: email,
+			// 	});
+			// } catch (err) {
+			// 	console.log(err);
+			// }
+			console.log("your order is send");
+
+			setIsError(false);
+			console.log(isError);
 		} else {
 			console.log("give all neccessary data");
+			setIsError(true);
+			console.log(isError);
 		}
 	};
 
@@ -302,7 +316,7 @@ const OrderPage = () => {
 					<Link to="/menu">
 						<LeftButton>BACK TO CART</LeftButton>
 					</Link>
-					<RightButton>CONFIRM ORDER</RightButton>
+					<RightButton onClick={handleOrder}>CONFIRM ORDER</RightButton>
 				</Top>
 				<Bottom>
 					<Summary>
@@ -315,115 +329,154 @@ const OrderPage = () => {
 							<Form>
 								<PaymentWrapper>
 									<PaymentTitle>Payment</PaymentTitle>
-									<PaymentItem checked={payChecked}>
-										<PaymentInput
-											type="checkbox"
-											checked={payChecked}
-											onChange={handlePayChange}
-										></PaymentInput>
-										<PaymentLabel>Online (recommended)</PaymentLabel>
-									</PaymentItem>
-									<PaymentItem checked={payChecked2}>
-										<PaymentInput
-											type="checkbox"
-											checked={payChecked2}
-											onChange={handlePayChange2}
-										></PaymentInput>
-										<PaymentLabel>Card (on delivery)</PaymentLabel>
-									</PaymentItem>
-									<PaymentItem checked={payChecked3}>
-										<PaymentInput
-											type="checkbox"
-											checked={payChecked3}
-											onChange={handlePayChange3}
-										></PaymentInput>
-										<PaymentLabel>Cash (on delivery)</PaymentLabel>
-									</PaymentItem>
+									<PaymentLabel>
+										<PaymentItem checked={payChecked}>
+											<PaymentInput
+												type="radio"
+												name="pay"
+												checked={payChecked}
+												onChange={handlePayChange}
+												required
+											></PaymentInput>
+											Online (recommended)
+										</PaymentItem>
+									</PaymentLabel>
+									<PaymentLabel>
+										<PaymentItem checked={payChecked2}>
+											<PaymentInput
+												type="radio"
+												name="pay"
+												checked={payChecked2}
+												onChange={handlePayChange2}
+												required
+											></PaymentInput>
+											Card (on delivery)
+										</PaymentItem>
+									</PaymentLabel>
+									<PaymentLabel>
+										<PaymentItem checked={payChecked3}>
+											<PaymentInput
+												type="radio"
+												name="pay"
+												checked={payChecked3}
+												onChange={handlePayChange3}
+												required
+											></PaymentInput>
+											Cash (on delivery)
+										</PaymentItem>
+									</PaymentLabel>
 								</PaymentWrapper>
 								<PaymentWrapper>
 									<PaymentTitle>Delivery</PaymentTitle>
-									<PaymentItem checked={deliveryChecked}>
-										<PaymentInput
-											type="checkbox"
-											checked={deliveryChecked}
-											onChange={handleDeliveryChange}
-										></PaymentInput>
-										<PaymentLabel>Adress delivered</PaymentLabel>
-									</PaymentItem>
-									<PaymentItem checked={deliveryChecked2}>
-										<PaymentInput
-											type="checkbox"
-											checked={deliveryChecked2}
-											onChange={handleDeliveryChange2}
-										></PaymentInput>
-										<PaymentLabel>personal pickup</PaymentLabel>
-									</PaymentItem>
+									<PaymentLabel>
+										<PaymentItem checked={deliveryChecked}>
+											<PaymentInput
+												type="radio"
+												name="del"
+												checked={deliveryChecked}
+												onChange={handleDeliveryChange}
+											></PaymentInput>
+											Adress delivered
+										</PaymentItem>
+									</PaymentLabel>
+									<PaymentLabel>
+										<PaymentItem checked={deliveryChecked2}>
+											<PaymentInput
+												type="radio"
+												name="del"
+												checked={deliveryChecked2}
+												onChange={handleDeliveryChange2}
+											></PaymentInput>
+											personal pickup
+										</PaymentItem>
+									</PaymentLabel>
 								</PaymentWrapper>
 								<PaymentWrapper>
 									<PaymentTitle>Term</PaymentTitle>
-									<PaymentItem checked={termChecked}>
-										<PaymentInput
-											type="checkbox"
-											checked={termChecked}
-											onChange={handleTermChange}
-										></PaymentInput>
-										<PaymentLabel>As soon as possible</PaymentLabel>
-									</PaymentItem>
-									<PaymentItem checked={termChecked2}>
-										<PaymentInput
-											type="checkbox"
-											checked={termChecked2}
-											onChange={handleTermChange2}
-										></PaymentInput>
-										<PaymentLabel>Choose term</PaymentLabel>
-										{termChecked2 && (
-											<TermInput
-												type="text"
-												placeholder="Type date and time here..."
-												onChange={(e) => setCustomTerm(e.target.value)}
-											></TermInput>
-										)}
-									</PaymentItem>
+									<PaymentLabel>
+										<PaymentItem checked={termChecked}>
+											<PaymentInput
+												type="radio"
+												name="term"
+												checked={termChecked}
+												onChange={handleTermChange}
+											></PaymentInput>
+											As soon as possible
+										</PaymentItem>
+									</PaymentLabel>
+									<PaymentLabel>
+										<PaymentItem checked={termChecked2}>
+											<PaymentInput
+												type="radio"
+												name="term"
+												checked={termChecked2}
+												onChange={handleTermChange2}
+											></PaymentInput>
+											Choose term
+											{termChecked2 && (
+												<TermInput
+													type="text"
+													name="term"
+													placeholder="Type date and time here..."
+													onChange={(e) => setCustomTerm(e.target.value)}
+												></TermInput>
+											)}
+										</PaymentItem>
+									</PaymentLabel>
 								</PaymentWrapper>
 								<PaymentWrapper>
 									<PaymentTitle>Contact Data</PaymentTitle>
-									<PaymentItem>
-										<PaymentLabel>Name: </PaymentLabel>
-										<TermInput
-											type="text"
-											placeholder="Type name here..."
-											onChange={(e) => setName(e.target.value)}
-										></TermInput>
-									</PaymentItem>
-									<PaymentItem>
-										<PaymentLabel>Phone: </PaymentLabel>
-										<TermInput
-											type="text"
-											placeholder="Type phone number here..."
-											onChange={(e) => setPhone(e.target.value)}
-										></TermInput>
-									</PaymentItem>
-									<PaymentItem>
-										<PaymentLabel>E-mail: </PaymentLabel>
-										<TermInput
-											type="text"
-											placeholder="Type e-mail here..."
-											onChange={(e) => setEmail(e.target.value)}
-										></TermInput>
-									</PaymentItem>
-									{deliveryChecked && (
+									<PaymentLabel>
 										<PaymentItem>
-											<PaymentLabel>Adress: </PaymentLabel>
+											Name:
 											<TermInput
 												type="text"
-												placeholder="Type adress here..."
-												onChange={(e) => setAdress(e.target.value)}
+												placeholder="Type name here..."
+												onChange={(e) => setName(e.target.value)}
+												required
 											></TermInput>
 										</PaymentItem>
+									</PaymentLabel>
+									<PaymentLabel>
+										<PaymentItem>
+											Phone:
+											<TermInput
+												type="text"
+												placeholder="Type phone number here..."
+												onChange={(e) => setPhone(e.target.value)}
+												required
+											></TermInput>
+										</PaymentItem>
+									</PaymentLabel>
+									<PaymentLabel>
+										<PaymentItem>
+											E-mail:
+											<TermInput
+												type="email"
+												placeholder="Type e-mail here..."
+												onChange={(e) => setEmail(e.target.value)}
+												required
+											></TermInput>
+										</PaymentItem>
+									</PaymentLabel>
+									{deliveryChecked && (
+										<PaymentLabel>
+											<PaymentItem>
+												Adress:
+												<TermInput
+													type="text"
+													placeholder="Type adress here..."
+													onChange={(e) => setAdress(e.target.value)}
+												></TermInput>
+											</PaymentItem>
+										</PaymentLabel>
 									)}
 								</PaymentWrapper>
 							</Form>
 						</OrderData>
+						<ErrorWrapper style={{ display: isError ? "block" : "none" }}>
+							Please give all required data to order!
+						</ErrorWrapper>
 					</Summary>
 					<Info>
 						{cart.products.map((product) => (
@@ -446,11 +499,12 @@ const OrderPage = () => {
 						))}
 					</Info>
 				</Bottom>
-				<SummaryButton onClick={handleOrder}>CONFIRM ORDER</SummaryButton>
+				<SummaryButton type="submit" onClick={handleOrder}>
+					CONFIRM ORDER
+				</SummaryButton>
 			</Wrapper>
-			<Footer/>
+			<Footer />
 		</Container>
-
 	);
 };
 
