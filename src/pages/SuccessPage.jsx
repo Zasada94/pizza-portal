@@ -45,7 +45,9 @@ const LeftButton = styled.button`
 const Bottom = styled.div``;
 
 const Info = styled.div`
-	margin: 10px 5px;
+	font-size: 18px;
+	margin: 20px 5px;
+	font-weight: 500;
 `;
 
 const Title = styled.div`
@@ -56,14 +58,15 @@ const Title = styled.div`
 `;
 
 const Subtitle = styled.div`
-	margin: 10px 5px;
+	margin: 20px 5px;
+	font-weight: 500;
 `;
 
 const Wrapper = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	margin: 10px 5px;
+	margin: 20px 5px;
 `;
 
 const SuccessPage = () => {
