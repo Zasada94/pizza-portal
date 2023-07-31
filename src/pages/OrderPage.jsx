@@ -6,6 +6,7 @@ import Navbar from "../components/Navbar";
 import { useState } from "react";
 import { publicRequest } from "../requestMethods";
 import Footer from "../components/Footer";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
 	margin: 0 auto;
@@ -168,7 +169,7 @@ const OrderData = styled.div``;
 const Form = styled.form``;
 
 const ErrorWrapper = styled.div`
-font-weight: 600;
+	font-weight: 600;
 	color: red;
 `;
 
@@ -184,7 +185,7 @@ const PaymentItem = styled.div`
 	padding: 5px;
 	overflow: hidden;
 	border: ${(props) =>
-		!!props.checked ? "1px solid var(--green)" : "1px solid lightgrey"};
+		!!props.checked ? "2px solid var(--green)" : "2px solid lightgrey"};
 	border-radius: 5px;
 `;
 const PaymentTitle = styled.h3`
@@ -213,6 +214,7 @@ const TermInput = styled.input`
 `;
 
 const OrderPage = () => {
+	const navigate = useNavigate();
 	const cart = useSelector((state) => state.cart);
 	const [payChecked, setPayChecked] = useState(false);
 	const [payChecked2, setPayChecked2] = useState(false);
@@ -268,12 +270,13 @@ const OrderPage = () => {
 		if (
 			(!!payChecked || !!payChecked2 || !!payChecked3) &&
 			!!cart.total &&
-			(!!deliveryChecked || (deliveryChecked2 && !!adress)) &&
+			(!!deliveryChecked2 || (deliveryChecked && !!adress)) &&
 			(!!termChecked || (!!termChecked2 && !!customTerm)) &&
 			!!name &&
 			!!phone &&
 			!!email
 		) {
+			//THIS PART IS TO SEND ORDER TO DATABASE
 			// try {
 			// 	const res = await publicRequest.post("/orders", {
 			// 		products: cart.products.map((item) => ({
@@ -296,14 +299,12 @@ const OrderPage = () => {
 			// } catch (err) {
 			// 	console.log(err);
 			// }
+			navigate("/success");
 			console.log("your order is send");
-
 			setIsError(false);
-			console.log(isError);
 		} else {
 			console.log("give all neccessary data");
 			setIsError(true);
-			console.log(isError);
 		}
 	};
 

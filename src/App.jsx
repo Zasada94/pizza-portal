@@ -7,6 +7,7 @@ import Promotions from "./pages/Promotions";
 import Product from "./pages/Product";
 import Cart from "./pages/Cart";
 import OrderPage from "./pages/OrderPage";
+import SuccessPage from "./pages/SuccessPage";
 
 function App() {
 	return (
@@ -21,6 +22,7 @@ function App() {
 				<Route path="/product/:id" element={<Product />} />
 				<Route path="cart" element={<Cart />} />
 				<Route path="order" element={<OrderPage />} />
+				<Route path="success" element={<SuccessPage />} />
 			</Routes>
 		</Router>
 	);
