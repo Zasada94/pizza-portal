@@ -227,10 +227,11 @@ const Cart = () => {
 				<Title>Your cart:</Title>
 				<Top>
 					<Link to="/menu">
-						<LeftButton>CONTINUE SHOPPING</LeftButton>
+						<LeftButton>BACK TO MENU</LeftButton>
 					</Link>
 					<Link to={`/order`} style={{ alignSelf: "center" }}>
-					<RightButton>ORDER NOW</RightButton></Link>
+						<RightButton>ORDER NOW</RightButton>
+					</Link>
 				</Top>
 				<Bottom>
 					<Info>
@@ -295,7 +296,7 @@ const Cart = () => {
 					</Summary>
 				</Bottom>
 			</Wrapper>
-			<Footer/>
+			<Footer />
 		</Container>
 	);
 };
