@@ -8,6 +8,7 @@ import { addProduct } from "../redux/cartRedux";
 import { useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { publicRequest } from "../requestMethods";
+import { dummyData } from "../dummyData";
 
 const Container = styled.div``;
 
@@ -155,11 +156,24 @@ const Product = () => {
 		}
 	};
 
+	//THIS PART IS TO GET PRODUCTS FROM MONGO DB WITH API TURNED ON
+	// useEffect(() => {
+	// 	const getProduct = async () => {
+	// 		try {
+	// 			const res = await publicRequest.get("/products/find/" + id);
+	// 			setProduct(res.data);
+	// 		} catch (err) {
+	// 			console.log(err);
+	// 		}
+	// 	};
+	// 	getProduct();
+	// }, [id]);
+
 	useEffect(() => {
 		const getProduct = async () => {
 			try {
-				const res = await publicRequest.get("/products/find/" + id);
-				setProduct(res.data);
+				const productFromDB = dummyData.find((item) => item._id === id);
+				setProduct(productFromDB);
 			} catch (err) {
 				console.log(err);
 			}

@@ -2,6 +2,7 @@ import React from "react";
 import { styled } from "styled-components";
 import { full, mobile } from "../responsive";
 import { Link } from "react-router-dom";
+import { dummyData } from "../dummyData";
 
 const ItemWrapper = styled.div`
 	display: flex;

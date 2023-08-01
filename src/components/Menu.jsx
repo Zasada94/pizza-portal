@@ -4,6 +4,7 @@ import axios from "axios";
 import Product from "./Product";
 import { useEffect, useState } from "react";
 import { publicRequest } from "../requestMethods";
+import { dummyData } from "../dummyData";
 
 const Container = styled.div`
 	display: flex;
@@ -45,6 +46,7 @@ const Menu = () => {
 				const res = await publicRequest.get(`/products`);
 				setProducts(res.data);
 			} catch (err) {
+				setProducts(dummyData); //THIS PART IS TO GET PRODUCTS FROM FAKE DB IN CASE API IS OFFLINE
 				console.log(err);
 			}
 		};
@@ -59,7 +61,7 @@ const Menu = () => {
 				Pizza
 			</Subtitle>
 			<Wrapper>
-				{products.map((item) => (
+				{dummyData.map((item) => (
 					<Product item={item} key={item._id} />
 				))}
 			</Wrapper>
