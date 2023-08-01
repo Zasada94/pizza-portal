@@ -35,11 +35,6 @@ Project was created with:
 - choosing and ordering pizzas. Products are get from database and orders are posted to database.
 
 - ## Screens
-![Screenshot](./src/images/screenshots/Screenshot_1.jpg)
-
-![Screenshot](./src/images/screenshots/Screenshot_2.jpg)
-
-![Screenshot](./src/images/screenshots/Screenshot_3.jpg)
 
 ![Screenshot](./src/images/screenshots/Screenshot_4.jpg)
 
