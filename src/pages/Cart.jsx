@@ -15,6 +15,7 @@ const Container = styled.div`
 
 const Wrapper = styled.div`
 	padding: 20px;
+
 	${mobile({
 		padding: "10px",
 	})}
@@ -87,6 +88,7 @@ const Product = styled.div`
 	padding: 5px;
 	flex-grow: 1;
 	flex-basis: 100%;
+	overflow: hidden;
 	${full({
 		margin: "15px 20px",
 		flexBasis: "40%",
