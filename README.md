@@ -6,6 +6,7 @@ React ordering pizza app (project in development).
 - [How To Install](#how-to-install)
 - [Technologies](#technologies)
 - [Functionalities](#functionalities)
+- [Screens](#screens)
 
 ## Live
 https://double-pizza.netlify.app/
@@ -32,3 +33,23 @@ Project was created with:
 ## Functionalities
 
 - choosing and ordering pizzas. Products are get from database and orders are posted to database.
+
+- ## Screens
+
+![Screenshot](./src/images/screenshots/Screenshot_4.jpg)
+
+![Screenshot](./src/images/screenshots/Screenshot_5.jpg)
+
+![Screenshot](./src/images/screenshots/Screenshot_6.jpg)
+
+![Screenshot](./src/images/screenshots/Screenshot_7.jpg)
+
+![Screenshot](./src/images/screenshots/Screenshot_8.jpg)
+
+![Screenshot](./src/images/screenshots/Screenshot_9.jpg)
+
+![Screenshot](./src/images/screenshots/Screenshot_10.jpg)
+
+![Screenshot](./src/images/screenshots/Screenshot_11.jpg)
+
+![Screenshot](./src/images/screenshots/Screenshot_12.jpg)
