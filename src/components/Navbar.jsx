@@ -16,7 +16,7 @@ const Wrapper = styled.div`
 
 const Container = styled.div`
 	height: 60px;
-	width: 100vw;
+	width: 95vw;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;

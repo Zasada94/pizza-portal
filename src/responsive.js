@@ -23,3 +23,11 @@ export const mobile = (props) => {
 		}
 	`;
 };
+
+export const smallest = (props) => {
+	return css`
+		@media (max-width: 500px) {
+			${props}
+		}
+	`;
+};
