@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Parrallax from "../components/Parrallax";
 import { styled } from "styled-components";
 import { mobile, smallest, tablet } from "../responsive";
+import Menu from "../components/Menu";
 
 const Promo = styled.div`
 	position: absolute;
@@ -27,12 +28,34 @@ const Container = styled.div`
 	})}
 `;
 
-const PromoWrapper = styled.div`
+const DoubleWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
 	align-items: center;
 	border: 0.5px solid none;
+	cursor: pointer;
+	border-radius: 15px;
+	box-shadow: 0 10px 45px 10px #26282b0f;
+	margin: 15px 30px;
+	padding: 35px 35px;
+	${mobile({
+		margin: "15px 40px",
+		padding: "35px 45px",
+	})}
+	${smallest({
+		margin: "15px 20px",
+		padding: "35px 25px",
+	})}
+`;
+
+const TripleWrapper = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+	border: 0.5px solid none;
+	cursor: pointer;
 	border-radius: 15px;
 	box-shadow: 0 10px 45px 10px #26282b0f;
 	margin: 15px 30px;
@@ -71,31 +94,60 @@ const PromoText = styled.p`
 `;
 
 const Promotions = () => {
+	const [menuVisible, setMenuVisible] = useState(false);
+	const [doubleWrapperVisible, setDoubleWrapperVisible] = useState(false);
+	const [tripleWrapperVisible, setTripleWrapperVisible] = useState(false);
+	const [doubleWrapperClicked, setDoubleWrapperClicked] = useState(false);
+	const [tripleWrapperClicked, setTripleWrapperClicked] = useState(false);
+
 	return (
 		<>
 			<Navbar />
 			<Parrallax />
 			<Promo>Promotions</Promo>
 			<Container>
-				<PromoWrapper>
-					<PromoImage
-						src="
-						https://i.ibb.co/3pnNTRN/promotwo.png
+				{!tripleWrapperClicked && (
+					<DoubleWrapper
+						onClick={() => {
+							setDoubleWrapperVisible(!doubleWrapperVisible);
+							setTripleWrapperVisible(false);
+							setMenuVisible(true);
+							setDoubleWrapperClicked(true);
+							setTripleWrapperClicked(false);
+						}}
+						clickedDouble={doubleWrapperVisible}
+					>
+						<PromoImage
+							src="
+						https://i.ibb.co/2YTk2Lc/promotwo.png
 						"
-					></PromoImage>
-					<PromoTitle>DOUBLE DEAL!</PromoTitle>
-					<PromoText>Order two pizzas. Second is half price!</PromoText>
-				</PromoWrapper>
-				<PromoWrapper>
-					<PromoImage
-						src="
+						></PromoImage>
+						<PromoTitle>DOUBLE DEAL!</PromoTitle>
+						<PromoText>Order two XL pizzas. Second is half price!</PromoText>
+					</DoubleWrapper>
+				)}
+				{!doubleWrapperClicked && (
+					<TripleWrapper
+						onClick={() => {
+							setTripleWrapperVisible(!tripleWrapperVisible);
+							setDoubleWrapperVisible(false);
+							setMenuVisible(true);
+							setTripleWrapperClicked(true);
+							setDoubleWrapperClicked(false);
+						}}
+						clickedTriple={tripleWrapperVisible}
+					>
+						<PromoImage
+							src="
 						https://i.ibb.co/nR6kVmP/promothree.png
 					"
-					></PromoImage>
-					<PromoTitle>TRIPLE DEAL!</PromoTitle>
-					<PromoText>Order three pizzas. Third one is free!</PromoText>
-				</PromoWrapper>
+						></PromoImage>
+						<PromoTitle>TRIPLE DEAL!</PromoTitle>
+						<PromoText>Order three XL pizzas. Third one is free!</PromoText>
+					</TripleWrapper>
+				)}
 			</Container>
+			{menuVisible && <Menu />}
 			<Footer />
 		</>
 	);
