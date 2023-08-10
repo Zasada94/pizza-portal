@@ -139,6 +139,7 @@ const Menu = () => {
 	const [size, setSize] = useState("XL");
 	const dispatch = useDispatch();
 	let [iterator, setIterator] = useState(0);
+	const [tempSelectedProduct, setTempSelectedProduct] = useState(null);
 
 	useEffect(() => {
 		const getProducts = async () => {
@@ -157,16 +158,49 @@ const Menu = () => {
 		const selectedProduct = products.find(
 			(product) => product._id === productId
 		);
+
 		if (selectedProduct) {
-			if (iterator === 1) {
-				const updatedProduct = selectedProduct;
-				updatedProduct.price = updatedProduct.price / 2;
-				dispatch(addProduct({ ...updatedProduct, quantity, size }));
+			if (!tempSelectedProduct) {
+				setTempSelectedProduct(selectedProduct);
+				console.log("First product selected:", selectedProduct);
 			} else {
-				dispatch(addProduct({ ...selectedProduct, quantity, size }));
-				setIterator(iterator++);
+				const lessExpensiveProduct =
+					selectedProduct.price < tempSelectedProduct.price
+						? selectedProduct
+						: tempSelectedProduct;
+
+				const moreExpensiveProduct =
+					selectedProduct.price >= tempSelectedProduct.price
+						? selectedProduct
+						: tempSelectedProduct;
+
+				// Now you can add both products to the cart with the desired adjustments
+				dispatch(
+					addProduct({
+						...lessExpensiveProduct,
+						price: lessExpensiveProduct.price / 2, // Cut the price in half
+						quantity,
+						size,
+					})
+				);
+
+				dispatch(
+					addProduct({
+						...moreExpensiveProduct,
+						quantity,
+						size,
+					})
+				);
+
+				console.log(
+					"Both products added to the cart:",
+					lessExpensiveProduct,
+					moreExpensiveProduct
+				);
+
+				// Reset temporary selected product
+				setTempSelectedProduct(null);
 			}
-			console.log(iterator);
 		} else {
 			console.log("Product not found");
 		}
