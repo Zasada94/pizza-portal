@@ -5,6 +5,7 @@ import Parrallax from "../components/Parrallax";
 import { styled } from "styled-components";
 import { mobile, smallest, tablet } from "../responsive";
 import DoubleMenu from "../components/DoubleMenu";
+import TripleMenu from "../components/TripleMenu";
 
 const Promo = styled.div`
 	position: absolute;
@@ -94,7 +95,8 @@ const PromoText = styled.p`
 `;
 
 const Promotions = () => {
-	const [menuVisible, setMenuVisible] = useState(false);
+	const [doubleMenu, setDoubleMenu] = useState(false);
+	const [tripleMenu, setTripleMenu] = useState(false);
 	const [doubleWrapperVisible, setDoubleWrapperVisible] = useState(false);
 	const [tripleWrapperVisible, setTripleWrapperVisible] = useState(false);
 	const [doubleWrapperClicked, setDoubleWrapperClicked] = useState(false);
@@ -111,7 +113,7 @@ const Promotions = () => {
 						onClick={() => {
 							setDoubleWrapperVisible(!doubleWrapperVisible);
 							setTripleWrapperVisible(false);
-							setMenuVisible(true);
+							setDoubleMenu(true);
 							setDoubleWrapperClicked(true);
 							setTripleWrapperClicked(false);
 						}}
@@ -131,7 +133,7 @@ const Promotions = () => {
 						onClick={() => {
 							setTripleWrapperVisible(!tripleWrapperVisible);
 							setDoubleWrapperVisible(false);
-							setMenuVisible(true);
+							setTripleMenu(true);
 							setTripleWrapperClicked(true);
 							setDoubleWrapperClicked(false);
 						}}
@@ -147,7 +149,8 @@ const Promotions = () => {
 					</TripleWrapper>
 				)}
 			</Container>
-			{menuVisible && <DoubleMenu />}
+			{doubleMenu && <DoubleMenu />}
+			{tripleMenu && <TripleMenu />}
 			<Footer />
 		</>
 	);
