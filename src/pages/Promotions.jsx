@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 import Parrallax from "../components/Parrallax";
 import { styled } from "styled-components";
 import { mobile, smallest, tablet } from "../responsive";
-import Menu from "../components/Menu";
+import PromoMenu from "../components/PromoMenu";
 
 const Promo = styled.div`
 	position: absolute;
@@ -147,7 +147,7 @@ const Promotions = () => {
 					</TripleWrapper>
 				)}
 			</Container>
-			{menuVisible && <Menu />}
+			{menuVisible && <PromoMenu />}
 			<Footer />
 		</>
 	);
