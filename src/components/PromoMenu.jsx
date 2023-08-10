@@ -138,6 +138,7 @@ const Menu = () => {
 	const [quantity, setQuantity] = useState(1);
 	const [size, setSize] = useState("XL");
 	const dispatch = useDispatch();
+	let [iterator, setIterator] = useState(0);
 
 	useEffect(() => {
 		const getProducts = async () => {
@@ -157,7 +158,15 @@ const Menu = () => {
 			(product) => product._id === productId
 		);
 		if (selectedProduct) {
-			dispatch(addProduct({ ...selectedProduct, quantity, size }));
+			if (iterator === 1) {
+				const updatedProduct = selectedProduct;
+				updatedProduct.price = updatedProduct.price / 2;
+				dispatch(addProduct({ ...updatedProduct, quantity, size }));
+			} else {
+				dispatch(addProduct({ ...selectedProduct, quantity, size }));
+				setIterator(iterator++);
+			}
+			console.log(iterator);
 		} else {
 			console.log("Product not found");
 		}
