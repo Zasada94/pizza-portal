@@ -218,6 +218,11 @@ const SummaryButton = styled.button`
 	}
 `;
 
+const PromoInfo = styled.div`
+	font-weight: 600;
+	color: var(--red);
+`;
+
 const Cart = () => {
 	const dispatch = useDispatch();
 	const cart = useSelector((state) => state.cart);
@@ -254,21 +259,24 @@ const Cart = () => {
 									</Details>
 								</ProductDetail>
 								<PriceDetail>
-									<ProductAmountContainer>
-										<Add
-											onClick={() => {
-												!product.isPromo &&
-													dispatch(increaseAmount({ ...product }));
-											}}
-										/>
-										<ProductAmount>{product.quantity}</ProductAmount>
-										<Remove
-											onClick={() => {
-												!product.isPromo &&
-													dispatch(decreaseAmount({ ...product }));
-											}}
-										/>
-									</ProductAmountContainer>
+									{!product.isPromo && (
+										<ProductAmountContainer>
+											<Add
+												onClick={() => {
+													!product.isPromo &&
+														dispatch(increaseAmount({ ...product }));
+												}}
+											/>
+											<ProductAmount>{product.quantity}</ProductAmount>
+											<Remove
+												onClick={() => {
+													!product.isPromo &&
+														dispatch(decreaseAmount({ ...product }));
+												}}
+											/>
+										</ProductAmountContainer>
+									)}
+									{product.isPromo && <PromoInfo>PROMO</PromoInfo>}
 									<ProductPrice>
 										{product.price * product.quantity} PLN
 									</ProductPrice>

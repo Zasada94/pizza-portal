@@ -7,7 +7,7 @@ import { publicRequest } from "../requestMethods";
 import { dummyData } from "../dummyData";
 import { full, mobile } from "../responsive";
 import { useDispatch } from "react-redux";
-import { addProduct } from "../redux/cartRedux";
+import { addPromo } from "../redux/cartRedux";
 
 const Container = styled.div`
 	display: flex;
@@ -200,7 +200,7 @@ const TripleMenu = () => {
 					middleExpensiveProduct = tempSelectedProduct2;
 				}
 				dispatch(
-					addProduct({
+					addPromo({
 						...leastExpensiveProduct,
 						price: 0,
 						quantity,
@@ -209,7 +209,7 @@ const TripleMenu = () => {
 					})
 				);
 				dispatch(
-					addProduct({
+					addPromo({
 						...middleExpensiveProduct,
 						quantity,
 						size,
@@ -217,7 +217,7 @@ const TripleMenu = () => {
 					})
 				);
 				dispatch(
-					addProduct({
+					addPromo({
 						...mostExpensiveProduct,
 						quantity,
 						size,

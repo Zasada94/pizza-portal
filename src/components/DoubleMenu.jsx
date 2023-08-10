@@ -7,7 +7,7 @@ import { publicRequest } from "../requestMethods";
 import { dummyData } from "../dummyData";
 import { full, mobile } from "../responsive";
 import { useDispatch } from "react-redux";
-import { addProduct } from "../redux/cartRedux";
+import { addPromo } from "../redux/cartRedux";
 
 const Container = styled.div`
 	display: flex;
@@ -172,7 +172,7 @@ const DoubleMenu = () => {
 						? selectedProduct
 						: tempSelectedProduct;
 				dispatch(
-					addProduct({
+					addPromo({
 						...lessExpensiveProduct,
 						price: lessExpensiveProduct.price / 2,
 						quantity,
@@ -181,7 +181,7 @@ const DoubleMenu = () => {
 					})
 				);
 				dispatch(
-					addProduct({
+					addPromo({
 						...moreExpensiveProduct,
 						quantity,
 						size,
