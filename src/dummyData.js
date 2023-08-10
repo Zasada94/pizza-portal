@@ -7,6 +7,7 @@ export const dummyData = [
 		size: ["M", "L", "XL"],
 		price: 40,
 		inStock: true,
+		isPromo: false,
 	},
 	{
 		_id: "64b92f26810eb2efd2c57b1d",
@@ -16,6 +17,7 @@ export const dummyData = [
 		size: ["M", "L", "XL"],
 		price: 35,
 		inStock: true,
+		isPromo: false,
 	},
 	{
 		_id: "64b93027810eb2efd2c57b20",
@@ -25,6 +27,7 @@ export const dummyData = [
 		size: ["M", "L", "XL"],
 		price: 40,
 		inStock: true,
+		isPromo: false,
 	},
 	{
 		_id: "64b930a7810eb2efd2c57b27",
@@ -34,6 +37,7 @@ export const dummyData = [
 		size: ["M", "L", "XL"],
 		price: 40,
 		inStock: true,
+		isPromo: false,
 	},
 	{
 		_id: "64b93121810eb2efd2c57b2a",
@@ -43,5 +47,6 @@ export const dummyData = [
 		size: ["M", "L", "XL"],
 		price: 45,
 		inStock: true,
+		isPromo: false,
 	},
 ];

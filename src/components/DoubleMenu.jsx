@@ -133,7 +133,7 @@ const AddButton = styled.button`
 	})}
 `;
 
-const Menu = () => {
+const DoubleMenu = () => {
 	const [products, setProducts] = useState([]);
 	const [quantity, setQuantity] = useState(1);
 	const [size, setSize] = useState("XL");
@@ -158,11 +158,9 @@ const Menu = () => {
 		const selectedProduct = products.find(
 			(product) => product._id === productId
 		);
-
 		if (selectedProduct) {
 			if (!tempSelectedProduct) {
 				setTempSelectedProduct(selectedProduct);
-				console.log("First product selected:", selectedProduct);
 			} else {
 				const lessExpensiveProduct =
 					selectedProduct.price < tempSelectedProduct.price
@@ -173,32 +171,23 @@ const Menu = () => {
 					selectedProduct.price >= tempSelectedProduct.price
 						? selectedProduct
 						: tempSelectedProduct;
-
-				// Now you can add both products to the cart with the desired adjustments
 				dispatch(
 					addProduct({
 						...lessExpensiveProduct,
-						price: lessExpensiveProduct.price / 2, // Cut the price in half
+						price: lessExpensiveProduct.price / 2,
 						quantity,
 						size,
+						isPromo: true,
 					})
 				);
-
 				dispatch(
 					addProduct({
 						...moreExpensiveProduct,
 						quantity,
 						size,
+						isPromo: true,
 					})
 				);
-
-				console.log(
-					"Both products added to the cart:",
-					lessExpensiveProduct,
-					moreExpensiveProduct
-				);
-
-				// Reset temporary selected product
 				setTempSelectedProduct(null);
 			}
 		} else {
@@ -208,7 +197,7 @@ const Menu = () => {
 
 	return (
 		<Container>
-			<Title>Our menu:</Title>
+			<Title>Choose two XL pizzas- second is half price!</Title>
 			<Subtitle>
 				<LocalPizzaIcon />
 				Pizza
@@ -234,4 +223,4 @@ const Menu = () => {
 	);
 };
 
-export default Menu;
+export default DoubleMenu;

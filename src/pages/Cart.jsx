@@ -257,13 +257,15 @@ const Cart = () => {
 									<ProductAmountContainer>
 										<Add
 											onClick={() => {
-												dispatch(increaseAmount({ ...product }));
+												!product.isPromo &&
+													dispatch(increaseAmount({ ...product }));
 											}}
 										/>
 										<ProductAmount>{product.quantity}</ProductAmount>
 										<Remove
 											onClick={() => {
-												dispatch(decreaseAmount({ ...product }));
+												!product.isPromo &&
+													dispatch(decreaseAmount({ ...product }));
 											}}
 										/>
 									</ProductAmountContainer>
