@@ -138,7 +138,6 @@ const DoubleMenu = () => {
 	const [quantity, setQuantity] = useState(1);
 	const [size, setSize] = useState("XL");
 	const dispatch = useDispatch();
-	let [iterator, setIterator] = useState(0);
 	const [tempSelectedProduct, setTempSelectedProduct] = useState(null);
 
 	useEffect(() => {
@@ -197,7 +196,7 @@ const DoubleMenu = () => {
 
 	return (
 		<Container>
-			<Title>Choose two XL pizzas- second is half price!</Title>
+			<Title>Choose 2 pizzas</Title>
 			<Subtitle>
 				<LocalPizzaIcon />
 				Pizza
@@ -207,7 +206,7 @@ const DoubleMenu = () => {
 					<ItemWrapper key={item._id}>
 						<ItemImage src={item.img}></ItemImage>
 						<RightWrapper>
-							<ItemTitle>{item.title}</ItemTitle>
+							<ItemTitle>{item.title} XL</ItemTitle>
 							<ItemDesc>{item.desc}</ItemDesc>
 							<OthersWrapper>
 								<Price>{item.price} PLN</Price>

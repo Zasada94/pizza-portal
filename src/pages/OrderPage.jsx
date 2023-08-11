@@ -122,6 +122,7 @@ const Summary = styled.div`
 	margin: 10px 0;
 	padding: 10px 20px;
 	box-shadow: 0 10px 45px 10px #26282b0f;
+	max-height: 1100px;
 	${full({
 		margin: "15px 20px",
 	})}
@@ -157,6 +158,7 @@ const SummaryButton = styled.button`
 	font-weight: 500;
 	transition: 0.5s ease-out;
 	align-self: center;
+	margin-top: 30px;
 	&:hover {
 		background-color: white;
 		border: 1px solid #be3144;
@@ -478,6 +480,9 @@ const OrderPage = () => {
 						<ErrorWrapper style={{ display: isError ? "block" : "none" }}>
 							Please give all required data to order!
 						</ErrorWrapper>
+						<SummaryButton type="submit" onClick={handleOrder}>
+							CONFIRM ORDER
+						</SummaryButton>
 					</Summary>
 					<Info>
 						{cart.products.map((product) => (
@@ -500,9 +505,6 @@ const OrderPage = () => {
 						))}
 					</Info>
 				</Bottom>
-				<SummaryButton type="submit" onClick={handleOrder}>
-					CONFIRM ORDER
-				</SummaryButton>
 			</Wrapper>
 			<Footer />
 		</Container>

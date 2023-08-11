@@ -174,6 +174,7 @@ const Summary = styled.div`
 	margin: 10px 0;
 	padding: 10px 20px;
 	box-shadow: 0 10px 45px 10px #26282b0f;
+	max-height: 300px;
 	${full({
 		margin: "15px 20px",
 	})}

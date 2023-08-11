@@ -138,7 +138,6 @@ const TripleMenu = () => {
 	const [quantity, setQuantity] = useState(1);
 	const [size, setSize] = useState("XL");
 	const dispatch = useDispatch();
-	let [iterator, setIterator] = useState(0);
 	const [tempSelectedProduct, setTempSelectedProduct] = useState(null);
 	const [tempSelectedProduct2, setTempSelectedProduct2] = useState(null);
 
@@ -234,7 +233,7 @@ const TripleMenu = () => {
 
 	return (
 		<Container>
-			<Title>Choose three XL pizzas- third one is free!</Title>
+			<Title>Choose three pizzas</Title>
 			<Subtitle>
 				<LocalPizzaIcon />
 				Pizza
@@ -244,7 +243,7 @@ const TripleMenu = () => {
 					<ItemWrapper key={item._id}>
 						<ItemImage src={item.img}></ItemImage>
 						<RightWrapper>
-							<ItemTitle>{item.title}</ItemTitle>
+							<ItemTitle>{item.title} XL</ItemTitle>
 							<ItemDesc>{item.desc}</ItemDesc>
 							<OthersWrapper>
 								<Price>{item.price} PLN</Price>
