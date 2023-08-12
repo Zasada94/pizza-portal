@@ -9,7 +9,7 @@ const Wrapper = styled.div`
 
 const PromoImg = styled.img`
 	width: 100%;
-	max-width: 1000px;
+	max-width: 800px;
 	margin: 20px auto;
 	cursor: hover;
 `;

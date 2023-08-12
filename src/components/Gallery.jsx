@@ -4,14 +4,13 @@ import { full } from "../responsive";
 
 const Container = styled.div`
 	position: relative;
-	max-width: 100%;
 	height: auto;
 	aspect-ratio: 16/9;
 	border: none;
 	overflow: hidden;
 	${full({
 		aspectRatio: "auto",
-		maxHeight: "90vh",
+		maxHeight: "600px",
 	})}
 `;
 
@@ -36,7 +35,7 @@ const Gallery = () => {
 	useEffect(() => {
 		const interval = setInterval(() => {
 			setCurrentSlide((prevSlide) => (prevSlide + 1) % 3);
-		}, 5000); 
+		}, 5000);
 
 		return () => clearInterval(interval);
 	}, []);
