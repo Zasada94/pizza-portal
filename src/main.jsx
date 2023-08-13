@@ -6,13 +6,14 @@ import { Provider } from "react-redux";
 import { StyleSheetManager } from "styled-components";
 import isPropValid from "@emotion/is-prop-valid";
 
+
 ReactDOM.createRoot(document.getElementById("root")).render(
 	<Provider store={store}>
-		<StyleSheetManager
-			shouldForwardProp={isPropValid}
-			disableVendorPrefixes={false}
-		>
-			<App />
-		</StyleSheetManager>
+			<StyleSheetManager
+				shouldForwardProp={isPropValid}
+				disableVendorPrefixes={false}
+			>
+				<App />
+			</StyleSheetManager>
 	</Provider>
 );
