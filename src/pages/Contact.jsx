@@ -33,8 +33,9 @@ const Location = styled.div`
 `;
 
 const Gmaps = styled.div`
-	max-width: 100vw;
+	max-width: 90vw;
 	width: 600px;
+	margin: 0 auto;
 	${tablet({ order: "0" })}
 `;
 
@@ -99,7 +100,7 @@ const Contact = () => {
 					</Gmaps>
 				</Location>
 			</Wrapper>
-			<Footer/>
+			<Footer />
 		</>
 	);
 };

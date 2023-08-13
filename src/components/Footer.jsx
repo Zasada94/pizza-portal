@@ -8,7 +8,7 @@ import { mobile } from "../responsive";
 const Container = styled.div`
 	display: flex;
 	justify-content: space-around;
-	height: 120px;
+	height: 100px;
 	padding-top: 20px;
 	margin-left: auto;
 	margin-right: auto;
