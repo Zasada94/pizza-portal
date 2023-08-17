@@ -1,7 +1,7 @@
 import Home from "./pages/Home";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import MenuPage from "./pages/MenuPage";
-import Account from "./pages/Account";
+import Login from "./pages/Login";
 import Contact from "./pages/Contact";
 import Promotions from "./pages/Promotions";
 import Product from "./pages/Product";
@@ -17,7 +17,7 @@ function App() {
 				<Route exact path="/pizza-portal/" element={<Home />} />
 				<Route path="/menu" element={<MenuPage />} />
 				<Route path="/promotions" element={<Promotions />} />
-				<Route path="/account" element={<Account />} />
+				<Route path="/account" element={<Login />} />
 				<Route path="/contact" element={<Contact />} />
 				<Route path="/product/:id" element={<Product />} />
 				<Route path="cart" element={<Cart />} />

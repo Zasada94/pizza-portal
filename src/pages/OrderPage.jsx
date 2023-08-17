@@ -278,29 +278,29 @@ const OrderPage = () => {
 			!!phone &&
 			!!email
 		) {
-			//THIS PART IS TO SEND ORDER TO DATABASE
-			// try {
-			// 	const res = await publicRequest.post("/orders", {
-			// 		products: cart.products.map((item) => ({
-			// 			productId: item._id,
-			// 			quantity: item.quantity,
-			// 			size: item.size,
-			// 		})),
-			// 		total: cart.total,
-			// 		online: !!payChecked,
-			// 		card: !!payChecked2,
-			// 		cash: !!payChecked3,
-			// 		delivery: !!deliveryChecked,
-			// 		address: adress,
-			// 		ASAP: !!termChecked,
-			// 		term: customTerm,
-			// 		name: name,
-			// 		phone: phone,
-			// 		email: email,
-			// 	});
-			// } catch (err) {
-			// 	console.log(err);
-			// }
+			// THIS PART IS TO SEND ORDER TO DATABASE
+			try {
+				// const res = await publicRequest.post("/orders", {
+				// 	products: cart.products.map((item) => ({
+				// 		productId: item._id,
+				// 		quantity: item.quantity,
+				// 		size: item.size,
+				// 	})),
+				// 	total: cart.total,
+				// 	online: !!payChecked,
+				// 	card: !!payChecked2,
+				// 	cash: !!payChecked3,
+				// 	delivery: !!deliveryChecked,
+				// 	address: adress,
+				// 	ASAP: !!termChecked,
+				// 	term: customTerm,
+				// 	name: name,
+				// 	phone: phone,
+				// 	email: email,
+				// });
+			} catch (err) {
+				console.log(err);
+			}
 			navigate("/success");
 			console.log("your order is send");
 			setIsError(false);
