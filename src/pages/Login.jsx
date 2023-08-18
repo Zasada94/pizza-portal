@@ -5,7 +5,7 @@ import { login } from "../redux/apiCalls";
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { resetSuccessFlag } from "../redux/userRedux";
 
 const Container = styled.div`
@@ -59,11 +59,12 @@ const Button = styled.button`
 	}
 `;
 
-const Link = styled.a`
+const RegisterLink = styled.p`
 	margin: 5px 0px;
 	font-size: 12px;
 	text-decoration: underline;
 	cursor: pointer;
+	color: black;
 `;
 
 const Error = styled.span`
@@ -85,7 +86,7 @@ const Login = () => {
 	useEffect(() => {
 		if (isSuccess) {
 			navigate("/menu");
-			dispatch(resetSuccessFlag())
+			dispatch(resetSuccessFlag());
 		}
 	}, [isSuccess]);
 
@@ -113,7 +114,9 @@ const Login = () => {
 							LOG IN
 						</Button>
 						{error && <Error>Something went wrong...</Error>}
-						<Link>CREATE AN ACCOUNT</Link>
+						<Link to="/register">
+							<RegisterLink>CREATE AN ACCOUNT</RegisterLink>
+						</Link>
 					</Form>
 				</Wrapper>
 			</Container>
