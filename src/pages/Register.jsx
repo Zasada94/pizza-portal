@@ -80,7 +80,7 @@ const Register = () => {
 						</Agreement>
 						<Button>CREATE</Button>
 					</Form>
-					<Link to="/register">
+					<Link to="/login">
 						<LoginLink>HAVE AN ACCOUNT? SIGN IN</LoginLink>
 					</Link>
 				</Wrapper>

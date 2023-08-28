@@ -9,8 +9,10 @@ import Cart from "./pages/Cart";
 import OrderPage from "./pages/OrderPage";
 import SuccessPage from "./pages/SuccessPage";
 import Register from "./pages/Register";
+import { useSelector } from "react-redux";
 
 function App() {
+	const user = useSelector((state) => state.user.currentUser);
 	return (
 		<Router>
 			<Routes>
@@ -18,13 +20,13 @@ function App() {
 				<Route exact path="/pizza-portal/" element={<Home />} />
 				<Route path="/menu" element={<MenuPage />} />
 				<Route path="/promotions" element={<Promotions />} />
-				<Route path="/account" element={<Login />} />
-				<Route path="/register" element={<Register />} />
+				<Route path="/login" element={user ? <Home /> : <Login />} />
+				<Route path="/register" element={user ? <Home /> : <Register />} />
 				<Route path="/contact" element={<Contact />} />
 				<Route path="/product/:id" element={<Product />} />
 				<Route path="cart" element={<Cart />} />
 				<Route path="order" element={<OrderPage />} />
-				<Route path="success" element={<SuccessPage />} />
+				<Route path="success" element={user ? <Home /> : <SuccessPage />} />
 			</Routes>
 		</Router>
 	);

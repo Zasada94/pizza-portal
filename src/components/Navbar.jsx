@@ -162,7 +162,7 @@ const Navbar = () => {
 						</MenuItem>
 
 						<MenuItem onClick={() => navigate("/contact")}>CONTACT</MenuItem>
-						<MenuItem onClick={() => navigate("/account")}>ACCOUNT</MenuItem>
+						<MenuItem onClick={() => navigate("/login")}>ACCOUNT</MenuItem>
 					</MenuDesktop>
 				</Center>
 				<Right>
@@ -180,7 +180,7 @@ const Navbar = () => {
 				<MenuItem onClick={() => navigate("/menu")}>MENU</MenuItem>
 				<MenuItem onClick={() => navigate("/promotions")}>PROMOTIONS</MenuItem>
 				<MenuItem onClick={() => navigate("/contact")}>CONTACT</MenuItem>
-				<MenuItem onClick={() => navigate("/account")}>ACCOUNT</MenuItem>
+				<MenuItem onClick={() => navigate("/login")}>ACCOUNT</MenuItem>
 			</MenuMobile>
 		</Wrapper>
 	);
