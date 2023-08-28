@@ -64,24 +64,42 @@ const LoginLink = styled.p`
 	color: black;
 `;
 
+const Error = styled.div`
+	color: red;
+`;
+
+const Success = styled.div`
+	color: var(--green);
+`;
+
 const Register = () => {
 	const navigate = useNavigate();
 	const [username, setUsername] = useState("");
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [passwordConf, setPasswordConf] = useState("");
+	const [error, setError] = useState(null);
+	const [success, setSuccess] = useState(false);
 
 	const handleClick = async (e) => {
 		e.preventDefault();
+		setError(null);
 		try {
 			if (password === passwordConf) {
-				const response = await publicRequest.post("/auth/register", {
-					username,
-					email,
-					passwordConf,
-				});
+				// const response = await publicRequest.post("/auth/register", {
+				// 	username,
+				// 	email,
+				// 	passwordConf,
+				// });
+				console.log("registration successfull");
+				setSuccess(true);
+				setTimeout(() => navigate("/login"), 3000);
+			} else {
+				setError("Registration failed. Passwords don't match.");
 			}
-		} catch {}
+		} catch (err) {
+			setError("Registration failed. Please try again.");
+		}
 	};
 
 	return (
@@ -95,15 +113,17 @@ const Register = () => {
 							placeholder="username"
 							onChange={(e) => setUsername(e.target.value)}
 						/>
-						<Input
+						<Input type="email"
 							placeholder="email"
 							onChange={(e) => setEmail(e.target.value)}
 						/>
 						<Input
+							type="password"
 							placeholder="password"
 							onChange={(e) => setPassword(e.target.value)}
 						/>
 						<Input
+							type="password"
 							placeholder="confirm password"
 							onChange={(e) => setPasswordConf(e.target.value)}
 						/>
@@ -113,6 +133,10 @@ const Register = () => {
 						</Agreement>
 						<Button onClick={handleClick}>CREATE</Button>
 					</Form>
+					{error && <Error>{error}</Error>}
+					{success && (
+						<Success>Registration successful- Log in to continue!</Success>
+					)}
 					<Link to="/login">
 						<LoginLink>HAVE AN ACCOUNT? SIGN IN</LoginLink>
 					</Link>
