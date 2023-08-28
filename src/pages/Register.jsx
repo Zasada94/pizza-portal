@@ -2,7 +2,9 @@ import styled from "styled-components";
 import { mobile } from "../responsive";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { publicRequest } from "../requestMethods";
+import { useState } from "react";
 
 const Container = styled.div`
 	width: 100vw;
@@ -63,6 +65,25 @@ const LoginLink = styled.p`
 `;
 
 const Register = () => {
+	const navigate = useNavigate();
+	const [username, setUsername] = useState("");
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [passwordConf, setPasswordConf] = useState("");
+
+	const handleClick = async (e) => {
+		e.preventDefault();
+		try {
+			if (password === passwordConf) {
+				const response = await publicRequest.post("/auth/register", {
+					username,
+					email,
+					passwordConf,
+				});
+			}
+		} catch {}
+	};
+
 	return (
 		<>
 			<Navbar />
@@ -70,15 +91,27 @@ const Register = () => {
 				<Wrapper>
 					<Title>CREATE AN ACCOUNT</Title>
 					<Form>
-						<Input placeholder="username" />
-						<Input placeholder="email" />
-						<Input placeholder="password" />
-						<Input placeholder="confirm password" />
+						<Input
+							placeholder="username"
+							onChange={(e) => setUsername(e.target.value)}
+						/>
+						<Input
+							placeholder="email"
+							onChange={(e) => setEmail(e.target.value)}
+						/>
+						<Input
+							placeholder="password"
+							onChange={(e) => setPassword(e.target.value)}
+						/>
+						<Input
+							placeholder="confirm password"
+							onChange={(e) => setPasswordConf(e.target.value)}
+						/>
 						<Agreement>
 							By creating an account, I consent to the processing of my personal
 							data in accordance with the <b>PRIVACY POLICY</b>
 						</Agreement>
-						<Button>CREATE</Button>
+						<Button onClick={handleClick}>CREATE</Button>
 					</Form>
 					<Link to="/login">
 						<LoginLink>HAVE AN ACCOUNT? SIGN IN</LoginLink>
