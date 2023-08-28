@@ -7,12 +7,13 @@ import { publicRequest } from "../requestMethods";
 import { useState } from "react";
 
 const Container = styled.div`
-	width: 100vw;
-	height: 100vh;
+	width: 95vw;
+	height: 95vh;
 	background-size: cover;
 	display: flex;
+	flex-direction: column;
 	align-items: center;
-	justify-content: center;
+	justify-content: flex-start;
 `;
 
 const Wrapper = styled.div`
@@ -80,10 +81,12 @@ const Register = () => {
 	const [passwordConf, setPasswordConf] = useState("");
 	const [error, setError] = useState(null);
 	const [success, setSuccess] = useState(false);
+	const [isFetching, setIsFetching] = useState(false);
 
 	const handleClick = async (e) => {
 		e.preventDefault();
 		setError(null);
+		setIsFetching(true);
 		try {
 			if (password === passwordConf) {
 				// const response = await publicRequest.post("/auth/register", {
@@ -93,7 +96,10 @@ const Register = () => {
 				// });
 				console.log("registration successfull");
 				setSuccess(true);
-				setTimeout(() => navigate("/login"), 3000);
+				setTimeout(() => {
+					navigate("/login");
+					setIsFetching(false);
+				}, 3000);
 			} else {
 				setError("Registration failed. Passwords don't match.");
 			}
@@ -113,7 +119,8 @@ const Register = () => {
 							placeholder="username"
 							onChange={(e) => setUsername(e.target.value)}
 						/>
-						<Input type="email"
+						<Input
+							type="email"
 							placeholder="email"
 							onChange={(e) => setEmail(e.target.value)}
 						/>
@@ -131,7 +138,9 @@ const Register = () => {
 							By creating an account, I consent to the processing of my personal
 							data in accordance with the <b>PRIVACY POLICY</b>
 						</Agreement>
-						<Button onClick={handleClick}>CREATE</Button>
+						<Button onClick={handleClick} disabled={isFetching}>
+							CREATE
+						</Button>
 					</Form>
 					{error && <Error>{error}</Error>}
 					{success && (
