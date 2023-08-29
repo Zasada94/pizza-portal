@@ -76,7 +76,9 @@ const Login = () => {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const dispatch = useDispatch();
-	const { isFetching, isSuccess, error } = useSelector((state) => state.user);
+	const { isFetching, isSuccess, error } = useSelector(
+		(state) => state.user
+	);
 
 	const handleClick = async (e) => {
 		e.preventDefault();

@@ -22,11 +22,12 @@ const userSlice = createSlice({
 				(state.error = true),
 				(state.isSuccess = false);
 		},
-        resetSuccessFlag: (state) => {
+		resetSuccessFlag: (state) => {
 			state.isSuccess = false;
 		},
 	},
 });
 
-export const { loginStart, loginSuccess, loginFailure,resetSuccessFlag } = userSlice.actions;
+export const { loginStart, loginSuccess, loginFailure, resetSuccessFlag } =
+	userSlice.actions;
 export default userSlice.reducer;

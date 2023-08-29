@@ -137,6 +137,8 @@ const Navbar = () => {
 	const [open, setOpen] = useState(false);
 
 	const quantity = useSelector((state) => state.cart.quantity);
+	const user = useSelector((state) => state.user.currentUser);
+	// const isAdmin = useSelector((state) => state.user.currentUser.isAdmin);
 
 	return (
 		<Wrapper>
@@ -163,6 +165,9 @@ const Navbar = () => {
 
 						<MenuItem onClick={() => navigate("/contact")}>CONTACT</MenuItem>
 						<MenuItem onClick={() => navigate("/login")}>ACCOUNT</MenuItem>
+						{user?.isAdmin && (
+							<MenuItem onClick={() => navigate("/login")}>ACCOUNT</MenuItem>
+						)}
 					</MenuDesktop>
 				</Center>
 				<Right>
@@ -181,6 +186,9 @@ const Navbar = () => {
 				<MenuItem onClick={() => navigate("/promotions")}>PROMOTIONS</MenuItem>
 				<MenuItem onClick={() => navigate("/contact")}>CONTACT</MenuItem>
 				<MenuItem onClick={() => navigate("/login")}>ACCOUNT</MenuItem>
+				{user?.isAdmin && (
+					<MenuItem onClick={() => navigate("/login")}>ACCOUNT</MenuItem>
+				)}
 			</MenuMobile>
 		</Wrapper>
 	);

@@ -89,11 +89,11 @@ const Register = () => {
 		setIsFetching(true);
 		try {
 			if (password === passwordConf) {
-				// const response = await publicRequest.post("/auth/register", {
-				// 	username,
-				// 	email,
-				// 	passwordConf,
-				// });
+				const response = await publicRequest.post("/auth/register", {
+					username,
+					email,
+					password,
+				});
 				console.log("registration successfull");
 				setSuccess(true);
 				setTimeout(() => {
