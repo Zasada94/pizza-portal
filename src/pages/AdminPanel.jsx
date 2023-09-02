@@ -108,8 +108,47 @@ const Price = styled.div`
 	})}
 `;
 
+const AddWrapper = styled.form`
+	display: flex;
+	flex-direction: column;
+`;
+const AddImage = styled.input``;
+const AddTitle = styled.input``;
+const AddDesc = styled.input``;
+const AddPrice = styled.input``;
+const AddSize = styled.input``;
+const InStock = styled.input``;
+
+const InStockWrapper = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+`;
+
+const AddButton = styled.button`
+	color: white;
+	padding: 8px;
+	background-color: var(--green);
+	cursor: pointer;
+	font-weight: 500;
+	transition: 0.5s ease-out;
+	border: none;
+	border-radius: 10px;
+	&:hover {
+		background-color: #aab800;
+	}
+`;
+
 const AdminPanel = () => {
 	const [products, setProducts] = useState([]);
+	const [newProduct, setNewProduct] = useState({
+		immg: "",
+		title: "",
+		desc: "",
+		price: 0,
+		size: [],
+		inStock: false,
+	});
 
 	useEffect(() => {
 		const getProducts = async () => {
@@ -123,6 +162,21 @@ const AdminPanel = () => {
 		};
 		getProducts();
 	}, []);
+
+	const handleChange = (e) => {
+		const { name, value } = e.target;
+		setNewProduct({ ...newProduct, [name]: value });
+	};
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		try {
+			const res = await publicRequest.post("/products", newProduct);
+			console.log("Product created:", res.data);
+		} catch (err) {
+			console.log("error creating product:", err);
+		}
+	};
 
 	return (
 		<>
@@ -147,6 +201,52 @@ const AdminPanel = () => {
 						</ItemWrapper>
 					))}
 				</Wrapper>
+				Add product
+				<ItemWrapper>
+					<AddWrapper onSubmit={handleSubmit}>
+						<AddImage
+							placeholder="image url"
+							name="img"
+							value={newProduct.img}
+							onChange={handleChange}
+						></AddImage>
+						<AddTitle
+							placeholder="title text"
+							name="title"
+							value={newProduct.title}
+							onChange={handleChange}
+						></AddTitle>
+						<AddDesc
+							placeholder="description text"
+							name="desc"
+							value={newProduct.desc}
+							onChange={handleChange}
+						></AddDesc>
+						<AddPrice
+							placeholder="price value [PLN]"
+							name="price"
+							value={newProduct.price}
+							onChange={handleChange}
+						></AddPrice>
+						<AddSize
+							placeholder="sizes"
+							name="size"
+							value={newProduct.size}
+							onChange={handleChange}
+						></AddSize>
+						<InStockWrapper>
+							inStock?
+							<InStock
+								type="checkbox"
+								checked={newProduct.inStock}
+								onChange={(e) =>
+									setNewProduct({ ...newProduct, inStock: e.target.checked })
+								}
+							></InStock>
+						</InStockWrapper>
+						<AddButton>ADD PRODUCT</AddButton>
+					</AddWrapper>
+				</ItemWrapper>
 			</Container>
 			<Footer />
 		</>
