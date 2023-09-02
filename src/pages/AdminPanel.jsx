@@ -165,7 +165,12 @@ const AdminPanel = () => {
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
-		setNewProduct({ ...newProduct, [name]: value });
+		if (name === "size") {
+			const sizeArray = value.split(",");
+			setNewProduct({ ...newProduct, [name]: sizeArray });
+		} else {
+			setNewProduct({ ...newProduct, [name]: value });
+		}
 	};
 
 	const handleSubmit = async (e) => {
@@ -229,7 +234,7 @@ const AdminPanel = () => {
 							onChange={handleChange}
 						></AddPrice>
 						<AddSize
-							placeholder="sizes"
+							placeholder="sizes (comma-separated)"
 							name="size"
 							value={newProduct.size}
 							onChange={handleChange}
