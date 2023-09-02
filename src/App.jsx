@@ -9,6 +9,7 @@ import Cart from "./pages/Cart";
 import OrderPage from "./pages/OrderPage";
 import SuccessPage from "./pages/SuccessPage";
 import Register from "./pages/Register";
+import AdminPanel from "./pages/AdminPanel";
 import { useSelector } from "react-redux";
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
 				<Route path="cart" element={<Cart />} />
 				<Route path="order" element={<OrderPage />} />
 				<Route path="success" element={user ? <Home /> : <SuccessPage />} />
+				<Route path="admin" element={<AdminPanel />} />
 			</Routes>
 		</Router>
 	);

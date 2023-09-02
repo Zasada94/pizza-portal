@@ -61,7 +61,7 @@ const Menu = () => {
 				Pizza
 			</Subtitle>
 			<Wrapper>
-				{dummyData.map((item) => (
+				{products.map((item) => (
 					<Product item={item} key={item._id} />
 				))}
 			</Wrapper>

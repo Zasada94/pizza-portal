@@ -187,7 +187,7 @@ const Navbar = () => {
 				<MenuItem onClick={() => navigate("/contact")}>CONTACT</MenuItem>
 				<MenuItem onClick={() => navigate("/login")}>ACCOUNT</MenuItem>
 				{user?.isAdmin && (
-					<MenuItem onClick={() => navigate("/login")}>ACCOUNT</MenuItem>
+					<MenuItem onClick={() => navigate("/admin")}>ADMIN PANEL</MenuItem>
 				)}
 			</MenuMobile>
 		</Wrapper>
