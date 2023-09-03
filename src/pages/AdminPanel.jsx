@@ -48,6 +48,7 @@ const ItemWrapper = styled.div`
 	margin: 15px 40px;
 	padding: 15px 15px;
 	flex-basis: 100%;
+
 	${full({
 		margin: "15px 20px",
 		flexBasis: "40%",
@@ -112,13 +113,37 @@ const Price = styled.div`
 const AddWrapper = styled.form`
 	display: flex;
 	flex-direction: column;
+	padding: 10px;
+	width: 50vw;
+	overflow: hidden;
+	${full({
+		width: "25vw",
+	})};
 `;
-const AddImage = styled.input``;
-const AddTitle = styled.input``;
-const AddDesc = styled.input``;
-const AddPrice = styled.input``;
-const AddSize = styled.input``;
-const InStock = styled.input``;
+
+const AddInput = styled.input`
+	margin: 4px;
+	padding: 2px;
+	border: none;
+	border-radius: 5px;
+	background-color: #f6f6f6;
+`;
+
+const PriceWrapper = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+`;
+
+const PriceInput = styled.input`
+	max-width: 60%;
+	margin: 4px;
+	padding: 2px;
+	border: none;
+	border-radius: 5px;
+	background-color: #f6f6f6;
+	flex-grow: 1;
+`;
 
 const InStockWrapper = styled.div`
 	display: flex;
@@ -247,48 +272,51 @@ const AdminPanel = () => {
 						</ItemWrapper>
 					))}
 				</Wrapper>
-				Add product
+				<Title>Add product</Title>
 				<ItemWrapper>
 					<AddWrapper onSubmit={handleSubmit}>
-						<AddImage
+						<AddInput
 							placeholder="image url"
 							name="img"
 							value={newProduct.img}
 							onChange={handleChange}
-						></AddImage>
-						<AddTitle
+						></AddInput>
+						<AddInput
 							placeholder="title text"
 							name="title"
 							value={newProduct.title}
 							onChange={handleChange}
-						></AddTitle>
-						<AddDesc
+						></AddInput>
+						<AddInput
 							placeholder="description text"
 							name="desc"
 							value={newProduct.desc}
 							onChange={handleChange}
-						></AddDesc>
-						<AddPrice
-							placeholder="price value [PLN]"
-							name="price"
-							value={newProduct.price}
-							onChange={handleChange}
-						></AddPrice>
-						<AddSize
+						></AddInput>
+						<PriceWrapper>
+							Price:
+							<PriceInput
+								placeholder="price value [PLN]"
+								name="price"
+								value={newProduct.price}
+								onChange={handleChange}
+							></PriceInput>
+						</PriceWrapper>
+						<AddInput
 							placeholder="sizes (comma-separated)"
 							name="size"
 							value={newProduct.size}
 							onChange={handleChange}
-						></AddSize>
+						></AddInput>
 						<InStockWrapper>
-							inStock?
-							<InStock
+							in stock?
+							<AddInput
 								type="checkbox"
 								checked={newProduct.inStock}
 								onChange={(e) =>
 									setNewProduct({ ...newProduct, inStock: e.target.checked })
 								}
-							></InStock>
+							></AddInput>
 						</InStockWrapper>
 						<AddButton>ADD PRODUCT</AddButton>
 					</AddWrapper>

@@ -3,8 +3,24 @@ import { publicRequest } from "../requestMethods";
 import { useLocation, useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 import { full, mobile } from "../responsive";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
-const Container = styled.div``;
+const Container = styled.div`
+	max-width: 1200px;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+`;
+
+const Title = styled.h1`
+	font-weight: 500;
+	font-size: 30px;
+	align-self: start;
+	margin: 10px 0 0 40px;
+`;
 
 const ItemWrapper = styled.div`
 	display: flex;
@@ -28,13 +44,37 @@ const ItemWrapper = styled.div`
 const AddWrapper = styled.form`
 	display: flex;
 	flex-direction: column;
+	padding: 10px;
+	width: 50vw;
+	overflow: hidden;
+	${full({
+		width: "25vw",
+	})};
 `;
-const AddImage = styled.input``;
-const AddTitle = styled.input``;
-const AddDesc = styled.input``;
-const AddPrice = styled.input``;
-const AddSize = styled.input``;
-const InStock = styled.input``;
+
+const AddInput = styled.input`
+	margin: 4px;
+	padding: 2px;
+	border: none;
+	border-radius: 5px;
+	background-color: #f6f6f6;
+`;
+
+const PriceWrapper = styled.div`
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+`;
+
+const PriceInput = styled.input`
+	max-width: 60%;
+	margin: 4px;
+	padding: 2px;
+	border: none;
+	border-radius: 5px;
+	background-color: #f6f6f6;
+	flex-grow: 1;
+`;
 
 const InStockWrapper = styled.div`
 	display: flex;
@@ -104,53 +144,61 @@ const EditProduct = () => {
 	};
 
 	return (
-		<Container>
-			<ItemWrapper>
-				<AddWrapper onSubmit={handleUpdate}>
-					<AddImage
-						placeholder="image url"
-						name="img"
-						value={product.img}
-						onChange={handleChange}
-					></AddImage>
-					<AddTitle
-						placeholder="title text"
-						name="title"
-						value={product.title}
-						onChange={handleChange}
-					></AddTitle>
-					<AddDesc
-						placeholder="description text"
-						name="desc"
-						value={product.desc}
-						onChange={handleChange}
-					></AddDesc>
-					<AddPrice
-						placeholder="price value [PLN]"
-						name="price"
-						value={product.price}
-						onChange={handleChange}
-					></AddPrice>
-					<AddSize
-						placeholder="sizes (comma-separated)"
-						name="size"
-						value={product.size}
-						onChange={handleChange}
-					></AddSize>
-					<InStockWrapper>
-						inStock?
-						<InStock
-							type="checkbox"
-							checked={product.inStock}
-							onChange={(e) =>
-								setProduct({ ...product, inStock: e.target.checked })
-							}
-						></InStock>
-					</InStockWrapper>
-					<AddButton type="submit">UPDATE</AddButton>
-				</AddWrapper>
-			</ItemWrapper>
-		</Container>
+		<>
+			<Navbar />
+			<Container>
+				<Title>Edit product</Title>
+				<ItemWrapper>
+					<AddWrapper onSubmit={handleUpdate}>
+						<AddInput
+							placeholder="image url"
+							name="img"
+							value={product.img}
+							onChange={handleChange}
+						></AddInput>
+						<AddInput
+							placeholder="title text"
+							name="title"
+							value={product.title}
+							onChange={handleChange}
+						></AddInput>
+						<AddInput
+							placeholder="description text"
+							name="desc"
+							value={product.desc}
+							onChange={handleChange}
+						></AddInput>
+						<PriceWrapper>
+							Price:
+							<PriceInput
+								placeholder="price value [PLN]"
+								name="price"
+								value={product.price}
+								onChange={handleChange}
+							></PriceInput>
+						</PriceWrapper>
+						<AddInput
+							placeholder="sizes (comma-separated)"
+							name="size"
+							value={product.size}
+							onChange={handleChange}
+						></AddInput>
+						<InStockWrapper>
+							inStock?
+							<AddInput
+								type="checkbox"
+								checked={product.inStock}
+								onChange={(e) =>
+									setProduct({ ...product, inStock: e.target.checked })
+								}
+							></AddInput>
+						</InStockWrapper>
+						<AddButton type="submit">UPDATE</AddButton>
+					</AddWrapper>
+				</ItemWrapper>
+			</Container>
+			<Footer />
+		</>
 	);
 };
 
