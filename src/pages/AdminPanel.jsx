@@ -125,9 +125,24 @@ const InStockWrapper = styled.div`
 	justify-content: space-between;
 `;
 
+const DeleteButton = styled.button`
+	color: white;
+	border: 1px solid rgba(0, 0, 0, 0);
+	border-radius: 10px;
+	padding: 8px;
+	margin: 5px;
+	background-color: #be3144;
+	cursor: pointer;
+	font-weight: 500;
+	transition: 0.5s ease-out;
+	&:hover {
+		background-color: #ab2c3d;
+	}
+`;
 const AddButton = styled.button`
 	color: white;
 	padding: 8px;
+	margin: 5px;
 	background-color: var(--green);
 	cursor: pointer;
 	font-weight: 500;
@@ -156,7 +171,8 @@ const AdminPanel = () => {
 				const res = await publicRequest.get(`/products`);
 				setProducts(res.data);
 			} catch (err) {
-				setProducts(dummyData); //THIS PART IS TO GET PRODUCTS FROM FAKE DB IN CASE API IS OFFLINE
+				// setProducts(dummyData);
+				//THIS PART IS TO GET PRODUCTS FROM FAKE DB IN CASE API IS OFFLINE
 				console.log(err);
 			}
 		};
@@ -183,6 +199,15 @@ const AdminPanel = () => {
 		}
 	};
 
+	const handleDelete = async (productId) => {
+		try {
+			await publicRequest.delete(`/products/${productId}`);
+			console.log("product deleted");
+		} catch (err) {
+			console.log("error deleting", err);
+		}
+	};
+
 	return (
 		<>
 			<Navbar />
@@ -203,6 +228,10 @@ const AdminPanel = () => {
 									<Price>{item.price} PLN</Price>
 								</OthersWrapper>
 							</RightWrapper>
+							<AddButton>EDIT</AddButton>
+							<DeleteButton onClick={() => handleDelete(item._id)}>
+								DELETE
+							</DeleteButton>
 						</ItemWrapper>
 					))}
 				</Wrapper>
