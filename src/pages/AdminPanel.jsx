@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { publicRequest } from "../requestMethods";
 import { dummyData } from "../dummyData";
 import { full, mobile } from "../responsive";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
 	display: flex;
@@ -155,6 +156,7 @@ const AddButton = styled.button`
 `;
 
 const AdminPanel = () => {
+	const navigate = useNavigate();
 	const [products, setProducts] = useState([]);
 	const [newProduct, setNewProduct] = useState({
 		immg: "",
@@ -193,9 +195,9 @@ const AdminPanel = () => {
 		e.preventDefault();
 		try {
 			const res = await publicRequest.post("/products", newProduct);
-			console.log("Product created:", res.data);
+			console.log("Product create:", res.data);
 		} catch (err) {
-			console.log("error creating product:", err);
+			console.log("error creating product", err);
 		}
 	};
 
@@ -206,6 +208,10 @@ const AdminPanel = () => {
 		} catch (err) {
 			console.log("error deleting", err);
 		}
+	};
+
+	const handleEdit = (productId) => {
+		navigate(`/edit/${productId}`);
 	};
 
 	return (
@@ -228,7 +234,13 @@ const AdminPanel = () => {
 									<Price>{item.price} PLN</Price>
 								</OthersWrapper>
 							</RightWrapper>
-							<AddButton>EDIT</AddButton>
+							<AddButton
+								onClick={() => {
+									handleEdit(item._id);
+								}}
+							>
+								EDIT
+							</AddButton>
 							<DeleteButton onClick={() => handleDelete(item._id)}>
 								DELETE
 							</DeleteButton>

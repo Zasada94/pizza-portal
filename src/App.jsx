@@ -11,6 +11,7 @@ import SuccessPage from "./pages/SuccessPage";
 import Register from "./pages/Register";
 import AdminPanel from "./pages/AdminPanel";
 import { useSelector } from "react-redux";
+import EditProduct from "./pages/EditProduct";
 
 function App() {
 	const user = useSelector((state) => state.user.currentUser);
@@ -25,10 +26,11 @@ function App() {
 				<Route path="/register" element={user ? <Home /> : <Register />} />
 				<Route path="/contact" element={<Contact />} />
 				<Route path="/product/:id" element={<Product />} />
-				<Route path="cart" element={<Cart />} />
-				<Route path="order" element={<OrderPage />} />
-				<Route path="success" element={user ? <Home /> : <SuccessPage />} />
-				<Route path="admin" element={<AdminPanel />} />
+				<Route path="/cart" element={<Cart />} />
+				<Route path="/order" element={<OrderPage />} />
+				<Route path="/success" element={user ? <Home /> : <SuccessPage />} />
+				<Route path="/admin" element={<AdminPanel />} />
+				<Route path="/edit/:id" element={<EditProduct />} />
 			</Routes>
 		</Router>
 	);
