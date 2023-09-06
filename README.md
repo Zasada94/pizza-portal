@@ -34,22 +34,41 @@ Project was created with:
 
 - choosing and ordering pizzas. Products are get from database and orders are posted to database.
 
-- ## Screens
-
+## Screens
+menu
 ![Screenshot](./src/images/screenshots/Screenshot_4.jpg)
 
+cart
 ![Screenshot](./src/images/screenshots/Screenshot_5.jpg)
 
+order
 ![Screenshot](./src/images/screenshots/Screenshot_6.jpg)
 
+feedback
 ![Screenshot](./src/images/screenshots/Screenshot_7.jpg)
 
+login and register
+![Screenshot](./src/images/screenshots/Screenshot_1.jpg)
+
+admin panel
+![Screenshot](./src/images/screenshots/Screenshot_2.jpg)
+
+menu mobile
 ![Screenshot](./src/images/screenshots/Screenshot_8.jpg)
 
 ![Screenshot](./src/images/screenshots/Screenshot_9.jpg)
 
+cart mobile
 ![Screenshot](./src/images/screenshots/Screenshot_10.jpg)
 
+order mobile
 ![Screenshot](./src/images/screenshots/Screenshot_11.jpg)
 
+feedback mobile
 ![Screenshot](./src/images/screenshots/Screenshot_12.jpg)
+
+login and register mobile
+![Screenshot](./src/images/screenshots/Screenshot_15.jpg)
+
+admin panel mobile
+![Screenshot](./src/images/screenshots/Screenshot_3.jpg)
