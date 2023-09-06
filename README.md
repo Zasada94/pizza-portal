@@ -61,17 +61,21 @@ Project was created with:
 ![Screenshot](./src/images/screenshots/Screenshot_2.jpg)
 
 * menu mobile :iphone:
+  
 ![Screenshot](./src/images/screenshots/Screenshot_8.jpg)
 
 ![Screenshot](./src/images/screenshots/Screenshot_9.jpg)
 
 * cart mobile :iphone:
+  
 ![Screenshot](./src/images/screenshots/Screenshot_10.jpg)
 
 * order mobile :iphone:
+  
 ![Screenshot](./src/images/screenshots/Screenshot_11.jpg)
 
 * feedback mobile :iphone:
+  
 ![Screenshot](./src/images/screenshots/Screenshot_12.jpg)
 
 * login and register mobile :iphone:
