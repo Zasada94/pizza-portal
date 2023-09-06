@@ -42,40 +42,40 @@ Project was created with:
 - admin panel with possibility to Create, Read, Update, Delete products.
 
 ## Screens
-menu
+* menu :computer:
 ![Screenshot](./src/images/screenshots/Screenshot_4.jpg)
 
-cart
+* cart :computer:
 ![Screenshot](./src/images/screenshots/Screenshot_5.jpg)
 
-order
+* order :computer:
 ![Screenshot](./src/images/screenshots/Screenshot_6.jpg)
 
-feedback
+* feedback :computer:
 ![Screenshot](./src/images/screenshots/Screenshot_7.jpg)
 
-login and register
+* login and register :computer:
 ![Screenshot](./src/images/screenshots/Screenshot_1.jpg)
 
-admin panel
+* admin panel :computer:
 ![Screenshot](./src/images/screenshots/Screenshot_2.jpg)
 
-menu mobile
+* menu mobile :iphone:
 ![Screenshot](./src/images/screenshots/Screenshot_8.jpg)
 
 ![Screenshot](./src/images/screenshots/Screenshot_9.jpg)
 
-cart mobile
+* cart mobile :iphone:
 ![Screenshot](./src/images/screenshots/Screenshot_10.jpg)
 
-order mobile
+* order mobile :iphone:
 ![Screenshot](./src/images/screenshots/Screenshot_11.jpg)
 
-feedback mobile
+* feedback mobile :iphone:
 ![Screenshot](./src/images/screenshots/Screenshot_12.jpg)
 
-login and register mobile
+* login and register mobile :iphone:
 ![Screenshot](./src/images/screenshots/Screenshot_15.jpg)
 
-admin panel mobile
+* admin panel mobile :iphone:
 ![Screenshot](./src/images/screenshots/Screenshot_3.jpg)
