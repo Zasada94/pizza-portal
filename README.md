@@ -60,21 +60,21 @@ Project was created with:
 * admin panel :computer:
 ![Screenshot](./src/images/screenshots/Screenshot_2.jpg)
 
-* menu mobile :iphone:
+* menu mobile :iphone:   
   
 ![Screenshot](./src/images/screenshots/Screenshot_8.jpg)
 
 ![Screenshot](./src/images/screenshots/Screenshot_9.jpg)
 
-* cart mobile :iphone:
+* cart mobile :iphone:   
   
 ![Screenshot](./src/images/screenshots/Screenshot_10.jpg)
 
-* order mobile :iphone:
+* order mobile :iphone:   
   
 ![Screenshot](./src/images/screenshots/Screenshot_11.jpg)
 
-* feedback mobile :iphone:
+* feedback mobile :iphone:   
   
 ![Screenshot](./src/images/screenshots/Screenshot_12.jpg)
 
