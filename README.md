@@ -19,6 +19,7 @@ https://double-pizza.netlify.app/
 - use "cd pizza-portal" (change direction) command to get into apps main folder,
 - install dependencies with npm command through terminal: "npm install",
 - start app live version with "npm run dev" command.
+- NOTE: to fully functioning login and admin-panel it's necessary to install backend api from: "https://github.com/Zasada94/pizza-ordering" and use Your own .env hidden data.
   
 ## Technologies
 
@@ -29,6 +30,10 @@ Project was created with:
 - materialUI
 - redux
 - mongoDB
+- node.js
+- express
+- mongoose
+- .env
 
 ## Functionalities
 
