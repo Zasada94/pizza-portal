@@ -1,5 +1,5 @@
 # Double Pizza
-React ordering pizza app.
+React ordering pizza app with register and login and possibility to Create, Read, Update, Delete products.
 
 ## Table of contents
 - [Live](#live)
@@ -37,7 +37,9 @@ Project was created with:
 
 ## Functionalities
 
-- choosing and ordering pizzas. Products are get from database and orders are posted to database.
+- choosing and ordering pizzas. Products are get from database and orders are posted to database,
+- databased registering users and login,
+- admin panel with possibility to Create, Read, Update, Delete products.
 
 ## Screens
 menu
