@@ -1,5 +1,5 @@
 # Double Pizza
-React ordering pizza app (project in development).
+React ordering pizza app.
 
 ## Table of contents
 - [Live](#live)
